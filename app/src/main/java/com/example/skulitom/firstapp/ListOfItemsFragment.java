@@ -11,11 +11,11 @@ import android.view.ViewGroup;
 
 
 
-public class ResultFragment extends Fragment {
+public class ListOfItemsFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_result, container,false);
+        View view = inflater.inflate(R.layout.fragment_list_of_items, container,false);
         return view;
     }
 }

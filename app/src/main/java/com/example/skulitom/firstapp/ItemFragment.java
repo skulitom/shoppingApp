@@ -10,12 +10,19 @@ import android.view.View;
 import android.view.ViewGroup;
 
 
-
-public class ResultFragment extends Fragment {
+/**
+ * A simple {@link Fragment} subclass.
+ * Activities that contain this fragment must implement the
+ * {@link ItemFragment.OnFragmentInteractionListener} interface
+ * to handle interaction events.
+ * Use the {@link ItemFragment#newInstance} factory method to
+ * create an instance of this fragment.
+ */
+public class ItemFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_result, container,false);
+        View view = inflater.inflate(R.layout.fragment_list, container,false);
         return view;
     }
 }
