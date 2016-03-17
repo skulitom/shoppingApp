@@ -114,5 +114,8 @@
     <string name="doneButton">Done</string>
     <string name="totalPrice">Total: £</string>
     <string name="saveListButton">Save</string>
-    <string name="nameSaveText">Name</string>>
+    <string name="nameSaveText">Name</string>
+    <string name="nameText">Name:</string>
+    <string name="numberText">Number:</string>
+    <string name="priceText">Price:</string>>
 </resources>

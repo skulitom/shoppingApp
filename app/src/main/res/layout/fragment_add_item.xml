@@ -21,7 +21,6 @@
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:inputType="numberDecimal"
         android:ems="10"
         android:id="@+id/editText2"
         android:layout_gravity="center"
@@ -30,7 +29,8 @@
         android:layout_alignLeft="@+id/editText"
         android:layout_alignStart="@+id/editText"
         android:layout_alignRight="@+id/seekBar"
-        android:layout_alignEnd="@+id/seekBar" />
+        android:layout_alignEnd="@+id/seekBar"
+        android:inputType="text" />
 
     <SeekBar
         android:layout_width="wrap_content"
@@ -41,7 +41,8 @@
         android:layout_alignLeft="@+id/editText"
         android:layout_alignStart="@+id/editText"
         android:layout_alignRight="@+id/editText"
-        android:layout_alignEnd="@+id/editText" />
+        android:layout_alignEnd="@+id/editText"
+        android:splitTrack="true" />
 
     <Button
         android:layout_width="wrap_content"
@@ -59,30 +60,33 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="Name:"
+        android:text="@string/nameText"
         android:id="@+id/nameView"
         android:layout_alignTop="@+id/editText2"
         android:layout_toLeftOf="@+id/editText2"
-        android:layout_toStartOf="@+id/editText2" />
+        android:layout_toStartOf="@+id/editText2"
+        android:layout_marginTop="20dp" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="Number:"
+        android:text="@string/numberText"
         android:id="@+id/numberView"
         android:layout_alignBottom="@+id/seekBar"
         android:layout_toLeftOf="@+id/seekBar"
-        android:layout_toStartOf="@+id/seekBar" />
+        android:layout_toStartOf="@+id/seekBar"
+        android:layout_marginTop="43dp" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="Price:"
+        android:text="@string/priceText"
         android:id="@+id/priceView"
         android:layout_above="@+id/doneButton"
         android:layout_toLeftOf="@+id/editText"
-        android:layout_toStartOf="@+id/editText" />
+        android:layout_toStartOf="@+id/editText"
+        android:layout_marginTop="200dp" />
 
 </RelativeLayout>
