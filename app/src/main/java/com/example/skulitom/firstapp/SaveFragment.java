@@ -11,10 +11,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import back.end.*;
 
 
 public class SaveFragment extends Fragment implements View.OnClickListener{
     View view;
+    MyDBHandler dbHandler;
 
     @Nullable
     @Override
@@ -29,10 +31,16 @@ public class SaveFragment extends Fragment implements View.OnClickListener{
     public void onClick(View v) {
         //do what you want to do when button is clicked
         EditText editTextName = (EditText) view.findViewById(R.id.editSaveList);
+        itemList currentList = new itemList();
         Fragment fragment = null;
         Class fragmentClass;
 
         if(editTextName.getText().toString().trim().length() > 0) {
+
+            currentList.setName(editTextName.getText().toString());
+            dbHandler = new MyDBHandler(super.getActivity(),null,null,1);
+            dbHandler.addList(currentList);
+
             switch (v.getId()) {
 
                 case R.id.saveListButton:

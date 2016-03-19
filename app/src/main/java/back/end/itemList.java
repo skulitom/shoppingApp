@@ -9,7 +9,7 @@ public class itemList {
     private String name;
     private ArrayList<item> list = new ArrayList<item>();
 
-    public void addItem(item product){
+    public void addList(item product){
         list.add(product);
     }
 
@@ -21,7 +21,7 @@ public class itemList {
         return list.size();
     }
 
-    public void removeItem(int index){
+    public void removeList(int index){
         list.remove(index);
     }
 

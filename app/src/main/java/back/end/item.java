@@ -26,7 +26,7 @@ public class item {
         this._quantity = _quantity;
     }
 
-    public void setTotalPrice(int _totalPrice){this._totalPrice = _totalPrice;}
+    public void setTotalPrice(double _totalPrice){this._totalPrice = _totalPrice*this._quantity;}
 
     public double getTotalPrice(){return _totalPrice;}
     public String getName(){return _name;}

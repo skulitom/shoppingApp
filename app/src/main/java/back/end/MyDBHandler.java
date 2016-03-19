@@ -14,7 +14,7 @@ public class MyDBHandler extends SQLiteOpenHelper{
 
     private static final int DATABASE_VERSION = 1;
     private static final String DATABASE_NAME = "shopingLists.db";
-    /////////////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////////// - item values
     public static final String TABLE_ITEMS = "items";
     public static final String COLUMN_ID = "_id";
     public static final String COLUMN_ITEM_NAME = "name";
@@ -22,7 +22,7 @@ public class MyDBHandler extends SQLiteOpenHelper{
     public static final String COLUMN_ITEM_POUNDS = "pounds";
     public static final String COLUMN_ITEM_PENNIES = "pennies";
     public static final String COLUMN_ITEM_QUANTITY = "quantity";
-    /////////////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////////// - list values
     public static final String TABLE_LISTS = "lists";
     public static final String COLUMN_LIST_NAME = "name";
 
