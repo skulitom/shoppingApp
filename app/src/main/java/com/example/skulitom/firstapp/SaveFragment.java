@@ -10,13 +10,16 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 
 
 public class SaveFragment extends Fragment implements View.OnClickListener{
+    View view;
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_save, container,false);
+        view = inflater.inflate(R.layout.fragment_save, container,false);
         Button doneSaveButton = (Button) view.findViewById(R.id.saveListButton);
         doneSaveButton.setOnClickListener(this);
         return view;
@@ -25,27 +28,33 @@ public class SaveFragment extends Fragment implements View.OnClickListener{
     @Override
     public void onClick(View v) {
         //do what you want to do when button is clicked
-
+        EditText editTextName = (EditText) view.findViewById(R.id.editSaveList);
         Fragment fragment = null;
         Class fragmentClass;
-        switch (v.getId()) {
 
-            case R.id.saveListButton:
-                fragmentClass = ListFragment.class;
-                break;
+        if(editTextName.getText().toString().trim().length() > 0) {
+            switch (v.getId()) {
 
-            default:
-                fragmentClass = SaveFragment.class;
-                break;
+                case R.id.saveListButton:
+                    fragmentClass = ListFragment.class;
+                    break;
+
+                default:
+                    fragmentClass = SaveFragment.class;
+                    break;
+            }
+
+            try {
+                fragment = (Fragment) fragmentClass.newInstance();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            FragmentManager fragmentManager = getFragmentManager();
+            fragmentManager.beginTransaction().replace(R.id.frame_container, fragment).commit();
         }
-
-        try {
-            fragment = (Fragment)fragmentClass.newInstance();
-        }catch(Exception e){
-            e.printStackTrace();
+        else{
+            editTextName.setError("Name cannot be empty");
         }
-        FragmentManager fragmentManager = getFragmentManager();
-        fragmentManager.beginTransaction().replace(R.id.frame_container, fragment).commit();
 
 
     }

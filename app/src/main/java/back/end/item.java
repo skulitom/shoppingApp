@@ -8,7 +8,7 @@ public class item {
     private int _pounds = 0;
     private int _pennies = 0;
     private int _quantity = 0;
-    private int _totalPrice = 0;
+    private double _totalPrice = 0;
 
     public void setName(String _name){
         this._name = _name;
@@ -18,27 +18,18 @@ public class item {
         this._pounds = _pounds;
     }
 
-    public void setPennies(int pennies){
+    public void setPennies(int _pennies){
         this._pennies = _pennies;
     }
 
-    public void setQuantity(int quantity){
+    public void setQuantity(int _quantity){
         this._quantity = _quantity;
     }
 
-    public int getTotalPrice(){
-        _totalPrice = 0;
+    public void setTotalPrice(int _totalPrice){this._totalPrice = _totalPrice;}
 
-        if(this._pennies>= 50){
-            _totalPrice++;
-        }
-        _totalPrice+= _pounds;
-        return _totalPrice;
-    }
-
-    public String getName(){
-        return _name;
-    }
+    public double getTotalPrice(){return _totalPrice;}
+    public String getName(){return _name;}
     public int getPounds(){
         return _pounds;
     }
