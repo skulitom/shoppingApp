@@ -38,7 +38,7 @@ public class SaveFragment extends Fragment implements View.OnClickListener{
         if(editTextName.getText().toString().trim().length() > 0) {
 
             currentList.setName(editTextName.getText().toString());
-            dbHandler = new MyDBHandler(super.getActivity(),null,null,1);
+            dbHandler = new MyDBHandler(getActivity(),null,null,1);
             dbHandler.addList(currentList);
 
             switch (v.getId()) {

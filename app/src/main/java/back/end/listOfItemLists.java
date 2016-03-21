@@ -7,6 +7,7 @@ package back.end;
 import java.util.ArrayList;
 
 public class listOfItemLists {
+
     private ArrayList<item> list = new ArrayList<item>();
 
     public void addItem(item newList){

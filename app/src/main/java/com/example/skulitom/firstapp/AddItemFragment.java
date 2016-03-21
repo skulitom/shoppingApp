@@ -48,8 +48,8 @@ public class AddItemFragment extends Fragment implements View.OnClickListener{
             currentItem.setPennies(pennies);
             currentItem.setQuantity(quantity);
             currentItem.setTotalPrice(price);
-            dbHandler = new MyDBHandler(super.getActivity(),null,null,1);
-            dbHandler.addItem(currentItem);
+            dbHandler = new MyDBHandler(getActivity(),null,null,1);
+           // dbHandler.addItem(currentItem);
 
 
 
