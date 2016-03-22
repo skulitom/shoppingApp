@@ -65,7 +65,7 @@ public class MyDBHandler extends SQLiteOpenHelper{
         values.put(COLUMN_ITEM_TOTAL_PRICE, item.getTotalPrice());
         values.put(COLUMN_ITEM_POUNDS, item.getPounds());
         values.put(COLUMN_ITEM_PENNIES, item.getPennies());
-        SQLiteDatabase db = super.getWritableDatabase();
+        SQLiteDatabase db = getWritableDatabase();
         db.insert(TABLE_ITEMS, null, values);
         db.close();
     }

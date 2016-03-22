@@ -42,6 +42,7 @@
         android:layout_alignStart="@+id/editTextPrice"
         android:layout_alignRight="@+id/editTextPrice"
         android:layout_alignEnd="@+id/editTextPrice"
+        android:max="10"
         android:splitTrack="true" />
 
     <Button
@@ -74,10 +75,9 @@
         android:text="@string/numberText"
         android:id="@+id/numberView"
         android:layout_alignBottom="@+id/seekBar"
-        android:layout_toLeftOf="@+id/seekBar"
-        android:layout_toStartOf="@+id/seekBar"
-        android:layout_marginTop="30dp"
-        android:layout_marginRight="20dp" />
+        android:layout_alignRight="@+id/nameView"
+        android:layout_alignEnd="@+id/nameView"
+        android:layout_marginBottom="10dp" />
 
     <TextView
         android:layout_width="wrap_content"

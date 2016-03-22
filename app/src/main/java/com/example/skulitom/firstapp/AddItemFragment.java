@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.SeekBar;
 
 import back.end.*;
 
@@ -17,6 +18,7 @@ import back.end.*;
 public class AddItemFragment extends Fragment implements View.OnClickListener{
     private View view;
     MyDBHandler dbHandler;
+    //SeekBar quantitySeekBar = (SeekBar) findViewById(R.id.seekBar);
 
     @Nullable
     @Override
@@ -32,6 +34,8 @@ public class AddItemFragment extends Fragment implements View.OnClickListener{
         EditText editTextName = (EditText) view.findViewById(R.id.editTextPrice);
         EditText editTextPrice = (EditText) view.findViewById(R.id.editTextName);
 
+        SeekBar quantitySeekBar = (SeekBar) view.findViewById(R.id.seekBar);
+
         item currentItem = new item();
 
 
@@ -46,10 +50,10 @@ public class AddItemFragment extends Fragment implements View.OnClickListener{
             int pennies = (int)((price-Math.floor(price))*100);
             currentItem.setPounds((int) Math.floor(price));
             currentItem.setPennies(pennies);
-            currentItem.setQuantity(quantity);
+            currentItem.setQuantity(quantitySeekBar.getProgress());
             currentItem.setTotalPrice(price);
             dbHandler = new MyDBHandler(getActivity(),null,null,1);
-           // dbHandler.addItem(currentItem);
+            dbHandler.addItem(currentItem);
 
 
 
