@@ -31,8 +31,8 @@ public class AddItemFragment extends Fragment implements View.OnClickListener{
     }
     @Override
     public void onClick(View v) {
-        EditText editTextName = (EditText) view.findViewById(R.id.editTextPrice);
-        EditText editTextPrice = (EditText) view.findViewById(R.id.editTextName);
+        EditText editTextName = (EditText) view.findViewById(R.id.editTextName);
+        EditText editTextPrice = (EditText) view.findViewById(R.id.editTextPrice);
 
         SeekBar quantitySeekBar = (SeekBar) view.findViewById(R.id.seekBar);
 
@@ -47,7 +47,7 @@ public class AddItemFragment extends Fragment implements View.OnClickListener{
             try {
                 price = Double.parseDouble(editTextPrice.getText().toString());
             }catch(NumberFormatException e){}
-            int pennies = (int)((price-Math.floor(price))*100);
+            int pennies = (int)((price-(int)Math.floor(price))*100);
             currentItem.setPounds((int) Math.floor(price));
             currentItem.setPennies(pennies);
             currentItem.setQuantity(quantitySeekBar.getProgress());

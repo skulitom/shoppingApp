@@ -3,7 +3,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.example.skulitom.firstapp.SavedListsFragment"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:id="@+id/LinearLayoutSavedLists">
 
     <!-- TODO: Update blank fragment layout -->
 
@@ -11,5 +12,13 @@
     <ScrollView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/scrollView3" />
+        android:id="@+id/scrollViewSavedLists" >
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/LinearLayoutScrollSL"></LinearLayout>
+    </ScrollView>
+
 </LinearLayout>

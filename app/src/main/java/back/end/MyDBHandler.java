@@ -12,7 +12,7 @@ import android.content.ContentValues;
 
 public class MyDBHandler extends SQLiteOpenHelper{
 
-    private static final int DATABASE_VERSION = 1;
+    private static final int DATABASE_VERSION = 2;
     private static final String DATABASE_NAME = "shopingLists.db";
     ///////////////////////////////////////////////////////////// - item values
     public static final String TABLE_ITEMS = "items";
@@ -32,18 +32,20 @@ public class MyDBHandler extends SQLiteOpenHelper{
 
     @Override
     public void onCreate(SQLiteDatabase db) {
+
         // create an item table
         String queryItem = "CREATE TABLE " + TABLE_ITEMS + "(" +
-                COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT" +
-                COLUMN_ITEM_NAME + " TEXT " +
-                COLUMN_ITEM_TOTAL_PRICE + " REAL " +
-                COLUMN_ITEM_POUNDS + " INTEGER " +
-                COLUMN_ITEM_PENNIES + " INTEGER " +
+                COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT " + "," +
+                COLUMN_ITEM_NAME + " TEXT " + "," +
+                COLUMN_ITEM_TOTAL_PRICE + " REAL " + "," +
+                COLUMN_ITEM_POUNDS + " INTEGER " + "," +
+                COLUMN_ITEM_PENNIES + " INTEGER " + "," +
                 COLUMN_ITEM_QUANTITY + " INTEGER " +
                 ");";
+
         // create a list table
-        String queryList = "CREATE TABLE" + TABLE_LISTS + "(" +
-                COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT " +
+        String queryList = "CREATE TABLE " + TABLE_LISTS + "(" +
+                COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT " + "," +
                 COLUMN_LIST_NAME + " TEXT " +
                 ");";
 
@@ -53,6 +55,7 @@ public class MyDBHandler extends SQLiteOpenHelper{
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_ITEMS);
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_LISTS);
         onCreate(db);
@@ -60,12 +63,12 @@ public class MyDBHandler extends SQLiteOpenHelper{
     // add an item to database
     public void addItem(item item){
         ContentValues values = new ContentValues();
+        SQLiteDatabase db = getWritableDatabase();
         values.put(COLUMN_ITEM_NAME, item.getName());
         values.put(COLUMN_ITEM_QUANTITY, item.getQuantity());
         values.put(COLUMN_ITEM_TOTAL_PRICE, item.getTotalPrice());
         values.put(COLUMN_ITEM_POUNDS, item.getPounds());
         values.put(COLUMN_ITEM_PENNIES, item.getPennies());
-        SQLiteDatabase db = getWritableDatabase();
         db.insert(TABLE_ITEMS, null, values);
         db.close();
     }
@@ -73,32 +76,32 @@ public class MyDBHandler extends SQLiteOpenHelper{
     public void addList(itemList itemList){
         ContentValues values = new ContentValues();
         values.put(COLUMN_LIST_NAME, itemList.getName());
-        SQLiteDatabase db = super.getWritableDatabase();
+        SQLiteDatabase db = getWritableDatabase();
         db.insert(TABLE_LISTS, null, values);
         db.close();
     }
     // delete item by name
     public void deleteItem(String itemName){
-        SQLiteDatabase db = super.getWritableDatabase();
+        SQLiteDatabase db = getWritableDatabase();
         db.execSQL("DELETE FROM " + TABLE_ITEMS + " WHERE " + COLUMN_ITEM_NAME + "=\"" + itemName + "\";");
     }
     // delete item by id
     public void deleteItem(int id){
-        SQLiteDatabase db = super.getWritableDatabase();
+        SQLiteDatabase db = getWritableDatabase();
         db.execSQL("DELETE FROM " + TABLE_ITEMS + " WHERE " + COLUMN_ID + "=\"" + id + "\";");
     }
     // delete list by name
     public void deleteList(String listName){
-        SQLiteDatabase db = super.getWritableDatabase();
+        SQLiteDatabase db = getWritableDatabase();
         db.execSQL("DELETE FROM " + TABLE_LISTS + " WHERE " + COLUMN_LIST_NAME + "=\"" + listName + "\";");
     }
     // delete list by id
     public void deleteList(int id){
-        SQLiteDatabase db = super.getWritableDatabase();
+        SQLiteDatabase db = getWritableDatabase();
         db.execSQL("DELETE FROM " + TABLE_LISTS + " WHERE " + COLUMN_ID + "=\"" + id + "\";");
     }
     public item getItem(int id){
-        SQLiteDatabase db = super.getWritableDatabase();
+        SQLiteDatabase db = getWritableDatabase();
         String query = "SELECT * FROM " + TABLE_ITEMS + " WHERE " + COLUMN_ID + "=\"" +id + "\";";
         Cursor c = db.rawQuery(query,null);
         item item = new item();
@@ -109,9 +112,31 @@ public class MyDBHandler extends SQLiteOpenHelper{
         item.setPennies(c.getInt(c.getColumnIndex("COLUMN_item_PENNIES")));
         return item;
     }
+
+    public item getItem(String name){
+        SQLiteDatabase db = getWritableDatabase();
+        String query = "DELETE FROM " + TABLE_ITEMS + " WHERE " + COLUMN_ITEM_NAME + "=\"" + name + "\";";
+        Cursor c = db.rawQuery(query,null);
+        item item = new item();
+        item.setName(c.getString(c.getColumnIndex("COLUMN_ITEM_NAME")));
+        item.setQuantity(c.getInt(c.getColumnIndex("COLUMN_ITEM_QUANTITY")));
+        item.setTotalPrice(c.getDouble(c.getColumnIndex("COLUMN_ITEM_TOTAL_PRICE")));
+        item.setPounds(c.getInt(c.getColumnIndex("COLUMN_ITEM_POUNDS")));
+        item.setPennies(c.getInt(c.getColumnIndex("COLUMN_item_PENNIES")));
+        return item;
+    }
     public itemList getList(int id){
-        SQLiteDatabase db = super.getWritableDatabase();
+        SQLiteDatabase db = getWritableDatabase();
         String query = "SELECT * FROM" + TABLE_LISTS + "WHERE"+ COLUMN_ID + "=\"" + id + "\";";
+        Cursor c = db.rawQuery(query,null);
+        itemList list = new itemList();
+        list.setName(c.getString(c.getColumnIndex("COLUMN_LIST_NAME")));
+        return list;
+    }
+
+    public itemList getList(String name){
+        SQLiteDatabase db = getWritableDatabase();
+        String query = "DELETE FROM " + TABLE_LISTS + " WHERE " + COLUMN_LIST_NAME + "=\"" + name + "\";";
         Cursor c = db.rawQuery(query,null);
         itemList list = new itemList();
         list.setName(c.getString(c.getColumnIndex("COLUMN_LIST_NAME")));
@@ -120,7 +145,7 @@ public class MyDBHandler extends SQLiteOpenHelper{
     // print out the database
     public String databaseToString(){
         String dbString = "";
-        SQLiteDatabase db = super.getWritableDatabase();
+        SQLiteDatabase db = getWritableDatabase();
         String query = "SELECT * FROM " + TABLE_ITEMS + " WHERE 1";
         // cursor points to location in results
         Cursor c = db.rawQuery(query,null);
@@ -133,6 +158,7 @@ public class MyDBHandler extends SQLiteOpenHelper{
                 dbString += "\n";
             }
         }
+        c.moveToNext();
         db.close();
 
         return dbString;

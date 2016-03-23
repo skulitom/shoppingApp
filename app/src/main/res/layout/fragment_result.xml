@@ -2,7 +2,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.skulitom.firstapp.ResultFragment">
+    tools:context="com.example.skulitom.firstapp.ResultFragment"
+    android:id="@+id/RelativeLayoutResult">
 
     <!-- TODO: Update blank fragment layout -->
 
@@ -10,7 +11,14 @@
     <ScrollView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/scrollViewResult" />
+        android:id="@+id/scrollViewResult" >
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/LinearLayoutScrollResult"></LinearLayout>
+    </ScrollView>
 
     <View
         android:layout_width="match_parent"
