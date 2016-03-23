@@ -14,7 +14,8 @@ import android.widget.EditText;
 import back.end.*;
 
 
-public class SaveFragment extends Fragment implements View.OnClickListener{
+public class
+        SaveFragment extends Fragment implements View.OnClickListener{
     View view;
     MyDBHandler dbHandler;
 

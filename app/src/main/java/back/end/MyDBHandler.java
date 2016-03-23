@@ -115,7 +115,7 @@ public class MyDBHandler extends SQLiteOpenHelper{
 
     public item getItem(String name){
         SQLiteDatabase db = getWritableDatabase();
-        String query = "DELETE FROM " + TABLE_ITEMS + " WHERE " + COLUMN_ITEM_NAME + "=\"" + name + "\";";
+        String query = "SELECT * FROM " + TABLE_ITEMS + " WHERE " + COLUMN_ITEM_NAME + "=\"" + name + "\";";
         Cursor c = db.rawQuery(query,null);
         item item = new item();
         item.setName(c.getString(c.getColumnIndex("COLUMN_ITEM_NAME")));
@@ -130,17 +130,28 @@ public class MyDBHandler extends SQLiteOpenHelper{
         String query = "SELECT * FROM" + TABLE_LISTS + "WHERE"+ COLUMN_ID + "=\"" + id + "\";";
         Cursor c = db.rawQuery(query,null);
         itemList list = new itemList();
-        list.setName(c.getString(c.getColumnIndex("COLUMN_LIST_NAME")));
+        if(c!=null) {
+            list.setName(c.getString(c.getColumnIndex("COLUMN_LIST_NAME")));
+        }
         return list;
     }
 
     public itemList getList(String name){
         SQLiteDatabase db = getWritableDatabase();
-        String query = "DELETE FROM " + TABLE_LISTS + " WHERE " + COLUMN_LIST_NAME + "=\"" + name + "\";";
+        String query = "SELECT * FROM " + TABLE_LISTS + " WHERE " + COLUMN_LIST_NAME + "=\"" + name + "\";";
         Cursor c = db.rawQuery(query,null);
         itemList list = new itemList();
         list.setName(c.getString(c.getColumnIndex("COLUMN_LIST_NAME")));
         return list;
+    }
+
+    public boolean checkListNull(itemList list){
+        itemList list1 = new itemList();
+        if(list1.equals(list)){
+            return false;
+        }else{
+            return true;
+        }
     }
     // print out the database
     public String databaseToString(){

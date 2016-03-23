@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.widget.LinearLayout;
 import android.widget.ScrollView;
 
 
@@ -22,9 +23,11 @@ public class ResultFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_result, container,false);
         ScrollView scroll = (ScrollView) view.findViewById(R.id.scrollViewResult);
+        LinearLayout linearLayout = (LinearLayout)view.findViewById(R.id.LinearLayoutScrollResult);
         drawRects = new DrawRects(this.getActivity());
-        drawRects.setBackgroundColor(Color.DKGRAY);
-        scroll.addView(drawRects);
+       // drawRects.setBackgroundColor(Color.DKGRAY);
+       // linearLayout.addView(drawRects);
+       // linearLayout.setVisibility(View.VISIBLE);
 
         return view;
     }

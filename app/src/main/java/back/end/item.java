@@ -28,6 +28,8 @@ public class item {
 
     public void setTotalPrice(double _totalPrice){this._totalPrice = _totalPrice*this._quantity;}
 
+
+
     public double getTotalPrice(){return _totalPrice;}
     public String getName(){return _name;}
     public int getPounds(){
