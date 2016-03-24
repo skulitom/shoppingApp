@@ -38,14 +38,13 @@ public class SavedListsFragment extends Fragment {
 
         int i = 1;
 
-        while(i<100){
+        while(dbHandler.checkListNull(dbHandler.getList(i))){
 
             Button button = new Button(this.getActivity());
 
-            button.setText("name");
+            button.setText(dbHandler.getList(i).getName());
             button.setGravity(Gravity.CENTER);
             button.setLayoutParams(new LinearLayout.LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT));
-
             linearLayout.addView(button);
 
             i++;

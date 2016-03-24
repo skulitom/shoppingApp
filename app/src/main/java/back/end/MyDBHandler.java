@@ -104,12 +104,17 @@ public class MyDBHandler extends SQLiteOpenHelper{
         SQLiteDatabase db = getWritableDatabase();
         String query = "SELECT * FROM " + TABLE_ITEMS + " WHERE " + COLUMN_ID + "=\"" +id + "\";";
         Cursor c = db.rawQuery(query,null);
+        c.moveToFirst();
         item item = new item();
-        item.setName(c.getString(c.getColumnIndex("COLUMN_ITEM_NAME")));
-        item.setQuantity(c.getInt(c.getColumnIndex("COLUMN_ITEM_QUANTITY")));
-        item.setTotalPrice(c.getDouble(c.getColumnIndex("COLUMN_ITEM_TOTAL_PRICE")));
-        item.setPounds(c.getInt(c.getColumnIndex("COLUMN_ITEM_POUNDS")));
-        item.setPennies(c.getInt(c.getColumnIndex("COLUMN_item_PENNIES")));
+        if(!c.isAfterLast()) {
+            if(c.getString(1)!=null) {
+                item.setName("Hello");
+                item.setQuantity(c.getInt(2));
+                item.setTotalPrice(c.getDouble(3));
+                item.setPounds(c.getInt(4));
+                item.setPennies(c.getInt(5));
+            }
+        }
         return item;
     }
 
@@ -117,21 +122,30 @@ public class MyDBHandler extends SQLiteOpenHelper{
         SQLiteDatabase db = getWritableDatabase();
         String query = "SELECT * FROM " + TABLE_ITEMS + " WHERE " + COLUMN_ITEM_NAME + "=\"" + name + "\";";
         Cursor c = db.rawQuery(query,null);
+        c.moveToFirst();
         item item = new item();
-        item.setName(c.getString(c.getColumnIndex("COLUMN_ITEM_NAME")));
-        item.setQuantity(c.getInt(c.getColumnIndex("COLUMN_ITEM_QUANTITY")));
-        item.setTotalPrice(c.getDouble(c.getColumnIndex("COLUMN_ITEM_TOTAL_PRICE")));
-        item.setPounds(c.getInt(c.getColumnIndex("COLUMN_ITEM_POUNDS")));
-        item.setPennies(c.getInt(c.getColumnIndex("COLUMN_item_PENNIES")));
+        if(!c.isAfterLast()) {
+            if(c.getString(c.getColumnIndex(COLUMN_ITEM_NAME))!=null) {
+                item.setName(c.getString(c.getColumnIndex("COLUMN_ITEM_NAME")));
+                item.setQuantity(c.getInt(c.getColumnIndex("COLUMN_ITEM_QUANTITY")));
+                item.setTotalPrice(c.getDouble(c.getColumnIndex("COLUMN_ITEM_TOTAL_PRICE")));
+                item.setPounds(c.getInt(c.getColumnIndex("COLUMN_ITEM_POUNDS")));
+                item.setPennies(c.getInt(c.getColumnIndex("COLUMN_item_PENNIES")));
+            }
+        }
         return item;
     }
     public itemList getList(int id){
         SQLiteDatabase db = getWritableDatabase();
-        String query = "SELECT * FROM" + TABLE_LISTS + "WHERE"+ COLUMN_ID + "=\"" + id + "\";";
+        String query = "SELECT * FROM " + TABLE_LISTS + " WHERE "+ COLUMN_ID + "=\"" + id + "\";";
+
         Cursor c = db.rawQuery(query,null);
+        c.moveToFirst();
         itemList list = new itemList();
-        if(c!=null) {
-            list.setName(c.getString(c.getColumnIndex("COLUMN_LIST_NAME")));
+        if(!c.isAfterLast()) {
+            if(c.getString(c.getColumnIndex(COLUMN_LIST_NAME))!=null) {
+                list.setName(c.getString(c.getColumnIndex(COLUMN_LIST_NAME)));
+            }
         }
         return list;
     }
@@ -146,8 +160,17 @@ public class MyDBHandler extends SQLiteOpenHelper{
     }
 
     public boolean checkListNull(itemList list){
-        itemList list1 = new itemList();
-        if(list1.equals(list)){
+
+        if(list.getName()==""||list.getName()==null){
+            return false;
+        }else{
+            return true;
+        }
+    }
+
+    public boolean checkListNull(item item){
+
+        if(item.getName()==""||item.getName()==null){
             return false;
         }else{
             return true;
