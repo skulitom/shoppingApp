@@ -108,7 +108,7 @@ public class MyDBHandler extends SQLiteOpenHelper{
         item item = new item();
         if(!c.isAfterLast()) {
             if(c.getString(1)!=null) {
-                item.setName("Hello");
+                item.setName(c.getString(1));
                 item.setQuantity(c.getInt(2));
                 item.setTotalPrice(c.getDouble(3));
                 item.setPounds(c.getInt(4));

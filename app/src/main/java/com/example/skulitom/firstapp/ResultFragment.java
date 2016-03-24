@@ -12,11 +12,15 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
+import android.widget.TextView;
+
+import back.end.MyDBHandler;
 
 
 public class ResultFragment extends Fragment {
 
     DrawRects drawRects;
+    MyDBHandler dbHandler;
 
     @Nullable
     @Override
@@ -28,6 +32,19 @@ public class ResultFragment extends Fragment {
        // drawRects.setBackgroundColor(Color.DKGRAY);
        // linearLayout.addView(drawRects);
        // linearLayout.setVisibility(View.VISIBLE);
+
+        TextView total = (TextView) view.findViewById(R.id.totalView);
+        dbHandler = new MyDBHandler(getActivity(),null,null,1);
+
+        int i = 1;
+        double holdTotal = 0;
+        while(dbHandler.checkListNull(dbHandler.getItem(i))){
+            holdTotal += dbHandler.getItem(i).getTotalPrice();
+
+            i++;
+        }
+        holdTotal = Math.round(holdTotal*100)/100;
+        total.setText("Total : £"+holdTotal);
 
         return view;
     }

@@ -13,7 +13,8 @@
         android:overScrollMode="never"
         android:id="@+id/scrollViewList"
         android:fillViewport="true"
-        android:foreground="#d2dff8" >
+        android:layout_marginTop="60dp"
+        >
 
         <LinearLayout
             android:orientation="vertical"
@@ -28,7 +29,7 @@
         android:text="@string/addItemButton"
         android:id="@+id/addItemButton"
         android:gravity="center"
-        android:layout_marginTop="60dp" />
+         />
 
 
     <Button

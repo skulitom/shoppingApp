@@ -40,10 +40,12 @@ public class ListFragment extends Fragment implements View.OnClickListener{
             while(dbHandler.checkListNull(dbHandler.getItem(i))){
 
                 Button button = new Button(this.getActivity());
-
-                button.setText(dbHandler.getItem(i).getName());
+                String bText = dbHandler.getItem(i).getName()+" : £"+dbHandler.getItem(i).getTotalPrice();
+                button.setText(bText);
                 button.setGravity(Gravity.CENTER);
-                button.setBackgroundColor(Color.RED);
+                button.setBackgroundColor(Color.BLUE);
+                button.setTextColor(Color.WHITE);
+                button.setHighlightColor(Color.DKGRAY);
                 button.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
                 linearLayout.addView(button);
 
