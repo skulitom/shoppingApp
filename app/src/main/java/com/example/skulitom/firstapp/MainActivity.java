@@ -118,9 +118,20 @@ public class MainActivity extends AppCompatActivity
     }
 
     @Override
-    protected void onDestroy() {
+    protected void onPause() {
+        super.onPause();
+        /*
         MyDBHandler dbHandler = new MyDBHandler(this,null,null,1);
 
-        super.onDestroy();
+
+
+        int i = 1;
+        while(dbHandler.checkListNull(dbHandler.getItem(i))){
+            dbHandler.deleteItem(i);
+            i++;
+        }
+        */
+
+
     }
 }

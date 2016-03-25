@@ -12,7 +12,7 @@ import android.content.ContentValues;
 
 public class MyDBHandler extends SQLiteOpenHelper{
 
-    private static final int DATABASE_VERSION = 2;
+    private static final int DATABASE_VERSION = 3;
     private static final String DATABASE_NAME = "shopingLists.db";
     ///////////////////////////////////////////////////////////// - item values
     public static final String TABLE_ITEMS = "items";
@@ -107,8 +107,8 @@ public class MyDBHandler extends SQLiteOpenHelper{
         c.moveToFirst();
         item item = new item();
         if(!c.isAfterLast()) {
-            if(c.getString(1)!=null) {
-                item.setName(c.getString(1));
+            if(c.getString(c.getColumnIndex(COLUMN_ITEM_NAME))!=null) {
+                item.setName(c.getString(c.getColumnIndex(COLUMN_ITEM_NAME)));
                 item.setQuantity(c.getInt(2));
                 item.setTotalPrice(c.getDouble(3));
                 item.setPounds(c.getInt(4));
