@@ -13,6 +13,7 @@
         android:overScrollMode="never"
         android:id="@+id/scrollViewList"
         android:fillViewport="true"
+        android:layout_marginBottom="120dp"
         android:layout_marginTop="60dp"
         >
 
@@ -28,6 +29,8 @@
         android:layout_height="wrap_content"
         android:text="@string/addItemButton"
         android:id="@+id/addItemButton"
+        android:layout_marginTop="-120dp"
+        android:layout_marginBottom="60dp"
         android:gravity="center"
          />
 
@@ -37,6 +40,8 @@
         android:layout_height="wrap_content"
         android:text="@string/saveButton"
         android:id="@+id/saveButton"
+        android:layout_marginTop="-60dp"
+
         android:gravity="center" />
 
 </LinearLayout>

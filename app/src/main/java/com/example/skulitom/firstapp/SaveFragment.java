@@ -35,11 +35,18 @@ public class
         itemList currentList = new itemList();
         Fragment fragment = null;
         Class fragmentClass;
+        dbHandler = new MyDBHandler(getActivity(),null,null,1);
+
 
         if(editTextName.getText().toString().trim().length() > 0) {
 
             currentList.setName(editTextName.getText().toString());
-            dbHandler = new MyDBHandler(getActivity(),null,null,1);
+
+            int i = 1;
+            while(dbHandler.checkListNull(dbHandler.getItem(i))){
+                currentList.addItem(dbHandler.getItem(i));
+                i++;
+            }
             dbHandler.addList(currentList);
 
             switch (v.getId()) {

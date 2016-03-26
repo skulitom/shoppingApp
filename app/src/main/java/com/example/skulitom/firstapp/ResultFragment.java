@@ -31,10 +31,9 @@ public class ResultFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_result, container,false);
         ScrollView scroll = (ScrollView) view.findViewById(R.id.scrollViewResult);
         LinearLayout linearLayout = (LinearLayout)view.findViewById(R.id.LinearLayoutScrollResult);
-        drawRects = new DrawRects(this.getActivity());
+        drawRects = new DrawRects(getActivity());
 
         //linearLayout.addView(drawRects);
-       // linearLayout.setVisibility(View.VISIBLE);
         //Rectangle rect = new Rectangle(getActivity());
         //linearLayout.addView(rect);
 
