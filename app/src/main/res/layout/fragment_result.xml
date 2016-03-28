@@ -14,11 +14,12 @@
         android:layout_marginTop="60dp"
         android:id="@+id/scrollViewResult" >
 
-        <LinearLayout
-            android:orientation="horizontal"
+        <ImageView
+            android:id="@+id/drawCanvasResult"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/LinearLayoutScrollResult"></LinearLayout>
+            android:layout_height="match_parent"
+            android:background="#FFFFFFFF"
+            />
     </ScrollView>
 
     <View
