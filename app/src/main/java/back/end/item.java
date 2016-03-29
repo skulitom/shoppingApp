@@ -26,7 +26,7 @@ public class item {
         this._quantity = _quantity;
     }
 
-    public void setTotalPrice(double _totalPrice){this._totalPrice = Math.round(_totalPrice*this._quantity*100)/100;}
+    public void setTotalPrice(double _totalPrice){this._totalPrice = _totalPrice*this._quantity;}
 
 
 
