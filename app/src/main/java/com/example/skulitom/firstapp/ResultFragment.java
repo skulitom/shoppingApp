@@ -33,7 +33,7 @@ public class ResultFragment extends Fragment {
 
         //linearLayout.addView(drawRects);
         Rectangle rect = new Rectangle(getActivity());
-        linearLayout.addView(rect);
+       // linearLayout.addView(rect);
 
         TextView total = (TextView) view.findViewById(R.id.totalView);
         dbHandler = new MyDBHandler(getActivity(),null,null,1);
