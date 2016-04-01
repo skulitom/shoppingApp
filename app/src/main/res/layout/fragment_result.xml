@@ -14,11 +14,15 @@
         android:layout_marginTop="60dp"
         android:id="@+id/scrollViewResult" >
 
-        <LinearLayout
-            android:orientation="horizontal"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/LinearLayoutScrollResult"></LinearLayout>
+        <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:tools="http://schemas.android.com/tools"
+            android:id="@+id/RelativeLayoutScrollResult"
+            android:layout_width="fill_parent"
+            android:layout_height="match_parent" >
+
+
+
+        </RelativeLayout>
     </ScrollView>
 
     <View

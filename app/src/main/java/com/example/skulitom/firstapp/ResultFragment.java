@@ -1,6 +1,7 @@
 package com.example.skulitom.firstapp;
 
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Rect;
@@ -14,6 +15,7 @@ import android.view.ViewGroup;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
@@ -29,12 +31,13 @@ public class ResultFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_result, container,false);
         ScrollView scroll = (ScrollView) view.findViewById(R.id.scrollViewResult);
-        LinearLayout linearLayout = (LinearLayout)view.findViewById(R.id.LinearLayoutScrollResult);
+        RelativeLayout linearLayout = (RelativeLayout)view.findViewById(R.id.RelativeLayoutScrollResult);
 
         //linearLayout.addView(drawRects);
         Rectangle rect = new Rectangle(getActivity());
-       // linearLayout.addView(rect);
-        //
+        linearLayout.setWillNotDraw(false);
+      //  rect.setLayoutParams(new LayoutParams(25, 25));
+        linearLayout.addView(rect);
 
         TextView total = (TextView) view.findViewById(R.id.totalView);
         dbHandler = new MyDBHandler(getActivity(),null,null,1);
@@ -61,8 +64,9 @@ public class ResultFragment extends Fragment {
         public void onDraw(Canvas canvas) {
      //       super.onDraw(canvas);
             paint.setColor(Color.GREEN);
+            paint.setStyle(Paint.Style.FILL);
      //       paint.setAntiAlias(true);
-            Rect rect = new Rect(20, 20,20,20);
+            Rect rect = new Rect(50,50,canvas.getWidth(),canvas.getHeight());
             canvas.drawRect(rect, paint );
         }
     }
