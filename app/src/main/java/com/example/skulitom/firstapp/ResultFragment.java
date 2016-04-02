@@ -14,6 +14,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.ScrollView;
@@ -35,6 +36,8 @@ public class ResultFragment extends Fragment {
 
         //linearLayout.addView(drawRects);
         Rectangle rect = new Rectangle(getActivity());
+        ImageView imageView = (ImageView)view.findViewById(R.id.imageViewResult);
+        //
         linearLayout.setWillNotDraw(false);
       //  rect.setLayoutParams(new LayoutParams(25, 25));
         linearLayout.addView(rect);
