@@ -37,7 +37,7 @@ public class ResultFragment extends Fragment {
         //linearLayout.addView(drawRects);
         Rectangle rect = new Rectangle(getActivity());
         ImageView imageView = (ImageView)view.findViewById(R.id.imageViewResult);
-        //
+        
         linearLayout.setWillNotDraw(false);
       //  rect.setLayoutParams(new LayoutParams(25, 25));
         linearLayout.addView(rect);
