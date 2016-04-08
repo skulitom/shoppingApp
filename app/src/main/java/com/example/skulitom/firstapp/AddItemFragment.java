@@ -4,12 +4,16 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.MultiAutoCompleteTextView;
 import android.widget.SeekBar;
+import android.widget.TextView;
 
 import back.end.*;
 
@@ -20,15 +24,52 @@ public class AddItemFragment extends Fragment implements View.OnClickListener{
     MyDBHandler dbHandler;
     //SeekBar quantitySeekBar = (SeekBar) findViewById(R.id.seekBar);
 
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_add_item, container,false);
+        TextView sugestion = (TextView)  view.findViewById(R.id.sugestText);
+       // sugestion.addTextChangedListener(dictionaryWatcher);
         Button doneButton = (Button) view.findViewById(R.id.doneButton);
         doneButton.setOnClickListener(this);
 
+
         return view;
     }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        TextView sugestion = (TextView)  view.findViewById(R.id.sugestText);
+        sugestion.addTextChangedListener(new TextWatcher() {
+
+            @Override
+            public void afterTextChanged(Editable s) {
+            }
+
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+                TextView sugestion = (TextView)  view.findViewById(R.id.sugestText);
+                EditText editTextName = (EditText) view.findViewById(R.id.editTextName);
+
+                ProductsDictionary dictionary = new ProductsDictionary();
+                sugestion.setText(dictionary.getCoresponFood(editTextName.getText().toString().trim()));
+
+
+            }
+
+        });
+
+    }
+
+
+
     @Override
     public void onClick(View v) {
         EditText editTextName = (EditText) view.findViewById(R.id.editTextName);

@@ -16,7 +16,8 @@
         android:layout_marginTop="320dp"
         android:layout_gravity="center_horizontal|top"
         android:inputType="number|numberDecimal"
-        android:layout_marginLeft="100dp" />
+        android:layout_marginLeft="100dp"
+        android:hint="Price of your item" />
 
     <EditText
         android:layout_width="wrap_content"
@@ -30,7 +31,9 @@
         android:layout_alignStart="@+id/editTextPrice"
         android:layout_alignRight="@+id/seekBar"
         android:layout_alignEnd="@+id/seekBar"
-        android:inputType="text" />
+        android:inputType="text"
+        android:autoText="true"
+        android:hint="Name of your item" />
 
     <SeekBar
         android:layout_width="wrap_content"
@@ -106,7 +109,18 @@
         android:text="@string/switchName"
         android:id="@+id/textView3"
         android:layout_alignBottom="@+id/switchQuantity"
-        android:layout_alignLeft="@+id/nameView"
-        android:layout_alignStart="@+id/nameView" />
+        android:layout_alignRight="@+id/nameView"
+        android:layout_alignEnd="@+id/nameView" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:id="@+id/sugestText"
+        android:layout_marginBottom="30dp"
+        android:layout_above="@+id/nameView"
+        android:layout_centerHorizontal="true"
+        android:textColor="#bd1f4df3"
+        android:text="tuna" />
 
 </RelativeLayout>
