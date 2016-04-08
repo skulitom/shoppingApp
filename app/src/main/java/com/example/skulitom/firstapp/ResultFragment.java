@@ -57,7 +57,7 @@ public class ResultFragment extends Fragment {
         String pounds, pennies;
         NumberToWord numConverter = new NumberToWord();
         pounds = numConverter.convert((int)Math.floor(holdTotal));
-        pennies = numConverter.convert((int)((holdTotal-Math.floor(holdTotal))*100));
+        pennies = numConverter.convert((int)Math.round(((holdTotal - Math.floor(holdTotal)) * 100)));
         ////
 
         ////- adding color
@@ -65,7 +65,7 @@ public class ResultFragment extends Fragment {
         total.setTextColor(Color.rgb(priceColor.getRed(holdTotal),priceColor.getGreen(holdTotal),0));
         ////
 
-        total.setText(pounds + " Pounds and " + pennies+" Pennies");
+        total.setText(pounds.substring(0,1).toUpperCase()+pounds.substring(1) + " Pounds and " + pennies+" Pence");
 
         return view;
     }
@@ -82,7 +82,7 @@ public class ResultFragment extends Fragment {
             paint.setColor(Color.GREEN);
             paint.setStyle(Paint.Style.FILL);
      //       paint.setAntiAlias(true);
-            Rect rect = new Rect(50,50,canvas.getWidth(),canvas.getHeight());
+            Rect rect = new Rect(50,50,canvas.getWidth(), 50);
             canvas.drawRect(rect, paint );
         }
     }

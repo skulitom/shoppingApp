@@ -35,7 +35,7 @@ public class PriceColor {
         else if(num < 5){this.itemGreen = 140;}
         else if(num < 10){this.itemGreen = 90;}
         else if(num < 20){this.itemGreen = 40;}
-        else{this.green = 0;}
-        return this.green;
+        else{this.itemGreen = 0;}
+        return this.itemGreen;
     }
 }

@@ -17,7 +17,7 @@ public class ProductsDictionary {
             , "Apple juice"
             , "Avocado roll"
             , "Bruscetta"
-            , "bacon"
+            , "bacon", "bannana"
             , "black beans"
             , "bagels"
             , "baked beans", "BBQ"
@@ -31,7 +31,7 @@ public class ProductsDictionary {
             , "cheese", "chicken"
             , "catfish", "chips"
             , "chocolate", "chowder"
-            , "clams", "coffee"
+            , "clams","coca cola", "coffee", "coke"
             , "cookies", "corn"
             , "cupcakes", "crab"
             , "curry", "cereal"
@@ -73,12 +73,14 @@ public class ProductsDictionary {
     };
 
     public String getCoresponFood(String typedIn){
-        String result = "";
+        String result = " ";
         for(String element : this.food){
-            if(element.substring(0,typedIn.length()).equals(typedIn)){
-                result = element;
-                break;
-            }
+                if(element.trim().length()>typedIn.trim().length()) {
+                        if (element.substring(0, typedIn.trim().length()).toLowerCase().trim().equals(typedIn.toLowerCase().trim())) {
+                                result = element;
+                                break;
+                        }
+                }
         }
         return result;
     }

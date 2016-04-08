@@ -22,15 +22,47 @@ import back.end.*;
 public class AddItemFragment extends Fragment implements View.OnClickListener{
     private View view;
     MyDBHandler dbHandler;
+    TextView sugestion;
+    EditText editTextName;
     //SeekBar quantitySeekBar = (SeekBar) findViewById(R.id.seekBar);
 
+    private TextWatcher dictionaryWatcher = new TextWatcher() {
 
+        @Override
+        public void afterTextChanged(Editable s) {
+            ProductsDictionary dictionary = new ProductsDictionary();
+            sugestion.setText(dictionary.getCoresponFood(editTextName.getText().toString()));
+            boolean exists=false;
+            int i = 1;
+           /* while(dbHandler.checkListNull(dbHandler.getItem(i))){
+                if(dbHandler.getItem(i).getName().equals(editTextName.getText().toString())){
+                    exists = true;
+                }
+                i++;
+            }*/
+            if(exists){
+                editTextName.setError("Item already exists");
+            }
+        }
+
+        @Override
+        public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+        }
+
+        @Override
+        public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+
+        }
+
+    };
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_add_item, container,false);
-        TextView sugestion = (TextView)  view.findViewById(R.id.sugestText);
-       // sugestion.addTextChangedListener(dictionaryWatcher);
+        sugestion = (TextView)  view.findViewById(R.id.sugestText);
+        editTextName = (EditText) view.findViewById(R.id.editTextName);
+        editTextName.addTextChangedListener(dictionaryWatcher);
         Button doneButton = (Button) view.findViewById(R.id.doneButton);
         doneButton.setOnClickListener(this);
 
@@ -42,29 +74,6 @@ public class AddItemFragment extends Fragment implements View.OnClickListener{
     public void onResume() {
         super.onResume();
         TextView sugestion = (TextView)  view.findViewById(R.id.sugestText);
-        sugestion.addTextChangedListener(new TextWatcher() {
-
-            @Override
-            public void afterTextChanged(Editable s) {
-            }
-
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-
-                TextView sugestion = (TextView)  view.findViewById(R.id.sugestText);
-                EditText editTextName = (EditText) view.findViewById(R.id.editTextName);
-
-                ProductsDictionary dictionary = new ProductsDictionary();
-                sugestion.setText(dictionary.getCoresponFood(editTextName.getText().toString().trim()));
-
-
-            }
-
-        });
 
     }
 
@@ -72,7 +81,7 @@ public class AddItemFragment extends Fragment implements View.OnClickListener{
 
     @Override
     public void onClick(View v) {
-        EditText editTextName = (EditText) view.findViewById(R.id.editTextName);
+
         EditText editTextPrice = (EditText) view.findViewById(R.id.editTextPrice);
 
         SeekBar quantitySeekBar = (SeekBar) view.findViewById(R.id.seekBar);

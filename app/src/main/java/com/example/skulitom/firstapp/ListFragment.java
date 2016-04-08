@@ -43,7 +43,7 @@ public class ListFragment extends Fragment implements View.OnClickListener{
                 String bText = dbHandler.getItem(i).getName()+" : £"+dbHandler.getItem(i).getTotalPrice();
                 button.setText(bText);
                 button.setGravity(Gravity.CENTER);
-                button.setBackgroundColor(Color.BLUE);
+                button.setBackgroundColor(Color.argb(50,0,0,100));
                 button.setTextColor(Color.rgb(0,priceColor.getItemGreen(dbHandler.getItem(i).getTotalPrice()),0));
                 button.setHighlightColor(Color.DKGRAY);
                 button.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
