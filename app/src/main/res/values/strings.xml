@@ -117,5 +117,6 @@
     <string name="nameSaveText">Name</string>
     <string name="nameText">Name:</string>
     <string name="numberText">Quantity:</string>
-    <string name="priceText">Price:</string>>
+    <string name="priceText">Price:</string>
+    <string name="switchName">Weight:</string>>
 </resources>

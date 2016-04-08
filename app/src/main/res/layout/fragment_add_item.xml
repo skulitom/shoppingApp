@@ -13,7 +13,7 @@
         android:layout_height="wrap_content"
         android:id="@+id/editTextPrice"
         android:layout_alignParentTop="true"
-        android:layout_marginTop="270dp"
+        android:layout_marginTop="320dp"
         android:layout_gravity="center_horizontal|top"
         android:inputType="number|numberDecimal"
         android:layout_marginLeft="100dp" />
@@ -36,7 +36,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/seekBar"
-        android:layout_marginTop="43dp"
+        android:layout_marginTop="93dp"
         android:layout_below="@+id/editTextName"
         android:layout_alignLeft="@+id/editTextPrice"
         android:layout_alignStart="@+id/editTextPrice"
@@ -88,5 +88,25 @@
         android:layout_alignTop="@+id/editTextPrice"
         android:layout_alignRight="@+id/numberView"
         android:layout_alignEnd="@+id/numberView" />
+
+    <Switch
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/switchQuantity"
+        android:layout_below="@+id/editTextName"
+        android:layout_marginTop="30dp"
+        android:checked="false"
+        android:layout_toRightOf="@+id/nameView"
+        android:layout_marginLeft="80dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="@string/switchName"
+        android:id="@+id/textView3"
+        android:layout_alignBottom="@+id/switchQuantity"
+        android:layout_alignLeft="@+id/nameView"
+        android:layout_alignStart="@+id/nameView" />
 
 </RelativeLayout>

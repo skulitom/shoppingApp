@@ -22,6 +22,7 @@ import android.widget.TextView;
 
 import back.end.MyDBHandler;
 import back.end.NumberToWord;
+import back.end.PriceColor;
 
 
 public class ResultFragment extends Fragment {
@@ -57,6 +58,11 @@ public class ResultFragment extends Fragment {
         NumberToWord numConverter = new NumberToWord();
         pounds = numConverter.convert((int)Math.floor(holdTotal));
         pennies = numConverter.convert((int)((holdTotal-Math.floor(holdTotal))*100));
+        ////
+
+        ////- adding color
+        PriceColor priceColor = new PriceColor();
+        total.setTextColor(Color.rgb(priceColor.getRed(holdTotal),priceColor.getGreen(holdTotal),0));
         ////
 
         total.setText(pounds + " Pounds and " + pennies+" Pennies");
