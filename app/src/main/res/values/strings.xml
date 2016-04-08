@@ -112,10 +112,10 @@
     <string name="addItemButton">Add Item</string>
     <string name="saveButton">Save</string>
     <string name="doneButton">Done</string>
-    <string name="totalPrice">Total: £0.0</string>
+    <string name="totalPrice">Zero Pounds and Zero Pennies</string>
     <string name="saveListButton">Save</string>
     <string name="nameSaveText">Name</string>
     <string name="nameText">Name:</string>
-    <string name="numberText">Number:</string>
+    <string name="numberText">Quantity:</string>
     <string name="priceText">Price:</string>>
 </resources>

@@ -21,6 +21,7 @@ import android.widget.ScrollView;
 import android.widget.TextView;
 
 import back.end.MyDBHandler;
+import back.end.NumberToWord;
 
 
 public class ResultFragment extends Fragment {
@@ -51,8 +52,14 @@ public class ResultFragment extends Fragment {
             holdTotal += dbHandler.getItem(i).getTotalPrice();
             i++;
         }
+        ////- numberToWord conversion
+        String pounds, pennies;
+        NumberToWord numConverter = new NumberToWord();
+        pounds = numConverter.convert((int)Math.floor(holdTotal));
+        pennies = numConverter.convert((int)((holdTotal-Math.floor(holdTotal))*100));
+        ////
 
-        total.setText("Total : £"+holdTotal);
+        total.setText(pounds + " Pounds and " + pennies+" Pennies");
 
         return view;
     }
