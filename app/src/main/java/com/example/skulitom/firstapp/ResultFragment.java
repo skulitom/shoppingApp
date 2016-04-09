@@ -44,14 +44,15 @@ public class ResultFragment extends Fragment {
         //linearLayout.addView(drawRects);
         Rectangle rect = new Rectangle(getActivity());
         ImageView imageView = (ImageView)view.findViewById(R.id.imageViewResult);
-
+        Bitmap b = Bitmap.createBitmap(100, 100, Bitmap.Config.ARGB_8888);
+        Canvas c = new Canvas(b);
+        imageView.setImageBitmap(b);
         linearLayout.setWillNotDraw(false);
-      //  rect.setLayoutParams(new LayoutParams(25, 25));
-        linearLayout.addView(rect);
+
 
         TextView total = (TextView) view.findViewById(R.id.totalView);
         dbHandler = new MyDBHandler(getActivity(),null,null,1);
-
+        ////- retrieve all items
         int i = 0;
         double holdTotal = 0;
         itemList dbItemList = dbHandler.databaseGetList();
@@ -59,6 +60,7 @@ public class ResultFragment extends Fragment {
             holdTotal += dbItemList.getItem(i).getTotalPrice();
             i++;
         }
+        ////
         ////- numberToWord conversion
         String pounds, pennies;
         NumberToWord numConverter = new NumberToWord();
@@ -70,7 +72,7 @@ public class ResultFragment extends Fragment {
         PriceColor priceColor = new PriceColor();
         total.setTextColor(Color.rgb(priceColor.getRed(holdTotal),priceColor.getGreen(holdTotal),0));
         ////
-
+        // set result text to specified currency
         total.setText(pounds.substring(0,1).toUpperCase()+pounds.substring(1) + " "+ currency.getBigCurrency()+" and " + pennies+" "+currency.getSmallCurrency()+" .");
 
         return view;

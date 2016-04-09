@@ -10,9 +10,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.MultiAutoCompleteTextView;
+import android.widget.RelativeLayout;
 import android.widget.SeekBar;
+import android.widget.Switch;
 import android.widget.TextView;
 
 import back.end.*;
@@ -24,6 +27,9 @@ public class AddItemFragment extends Fragment implements View.OnClickListener{
     MyDBHandler dbHandler;
     TextView sugestion;
     EditText editTextName;
+    Switch switchA;
+    SeekBar seekBarA;
+    RelativeLayout relativeLayout;
     //SeekBar quantitySeekBar = (SeekBar) findViewById(R.id.seekBar);
 
     private TextWatcher dictionaryWatcher = new TextWatcher() {
@@ -61,10 +67,24 @@ public class AddItemFragment extends Fragment implements View.OnClickListener{
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_add_item, container,false);
+        relativeLayout = (RelativeLayout) view.findViewById(R.id.AddItemRelativeLayout);
         sugestion = (TextView)  view.findViewById(R.id.sugestText);
         editTextName = (EditText) view.findViewById(R.id.editTextName);
         editTextName.addTextChangedListener(dictionaryWatcher);
         dbHandler = new MyDBHandler(getActivity(),null,null,1);
+        seekBarA = (SeekBar) view.findViewById(R.id.seekBar);
+        switchA = (Switch) view.findViewById(R.id.switchQuantity);
+        switchA.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked) {
+                    // The toggle is enabled
+                    relativeLayout.removeView(seekBarA);
+                } else {
+                    // The toggle is disabled
+                    relativeLayout.addView(seekBarA);
+                }
+            }
+        });
         Button doneButton = (Button) view.findViewById(R.id.doneButton);
         doneButton.setOnClickListener(this);
 

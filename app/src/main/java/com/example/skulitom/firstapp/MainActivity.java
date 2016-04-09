@@ -1,5 +1,6 @@
 package com.example.skulitom.firstapp;
 
+import android.app.ActivityManager;
 import android.support.v4.app.Fragment;
 import android.content.Intent;
 import android.os.Bundle;
@@ -126,6 +127,8 @@ public class MainActivity extends AppCompatActivity
     public void setLang(int lang){
         LANGUAGE = lang;
     }
+
+    
 
 
 }
