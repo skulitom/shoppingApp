@@ -5,19 +5,19 @@ import java.util.ArrayList;
 /**
  * Created by skulitom on 03/03/2016.
  */
-public class itemList {
+public class ListOfLists {
     private String _name;
-    private ArrayList<item> _list = new ArrayList<item>();
+    private ArrayList<itemList> _list = new ArrayList<itemList>();
 
-    public itemList(){
-        this._name = "Current List";
+    public ListOfLists(){
+        this._name = "All saved lists";
     }
 
-    public void addItem(item product){
+    public void addItem(itemList product){
         _list.add(product);
     }
 
-    public item getItem(int index){
+    public itemList getItem(int index){
         return _list.get(index);
     }
 

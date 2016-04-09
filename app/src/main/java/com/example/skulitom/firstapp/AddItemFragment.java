@@ -33,9 +33,10 @@ public class AddItemFragment extends Fragment implements View.OnClickListener{
             ProductsDictionary dictionary = new ProductsDictionary();
             sugestion.setText(dictionary.getCoresponFood(editTextName.getText().toString()));
             boolean exists=false;
-            int i = 1;
-            while(dbHandler.checkListNull(dbHandler.getItem(i))){
-                if(dbHandler.getItem(i).getName().toLowerCase().trim().equals(editTextName.getText().toString().toLowerCase().trim())){
+            int i = 0;
+            itemList dbItemList = dbHandler.databaseGetList();
+            while(i<dbItemList.getItemListLength()){
+                if(dbItemList.getItem(i).getName().toLowerCase().trim().equals(editTextName.getText().toString().toLowerCase().trim())){
                     exists = true;
                 }
                 i++;

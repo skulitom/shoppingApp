@@ -23,6 +23,7 @@ import android.widget.TextView;
 import back.end.MyDBHandler;
 import back.end.NumberToWord;
 import back.end.PriceColor;
+import back.end.itemList;
 
 
 public class ResultFragment extends Fragment {
@@ -47,10 +48,11 @@ public class ResultFragment extends Fragment {
         TextView total = (TextView) view.findViewById(R.id.totalView);
         dbHandler = new MyDBHandler(getActivity(),null,null,1);
 
-        int i = 1;
+        int i = 0;
         double holdTotal = 0;
-        while(dbHandler.checkListNull(dbHandler.getItem(i))){
-            holdTotal += dbHandler.getItem(i).getTotalPrice();
+        itemList dbItemList = dbHandler.databaseGetList();
+        while(i<dbItemList.getItemListLength()){
+            holdTotal += dbItemList.getItem(i).getTotalPrice();
             i++;
         }
         ////- numberToWord conversion

@@ -36,13 +36,13 @@ public class SavedListsFragment extends Fragment {
       //  linearLayout.setOrientation(LinearLayout.VERTICAL);
       //  linearLayout.setLayoutParams(new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT));
 
-        int i = 1;
-
-        while(dbHandler.checkListNull(dbHandler.getList(i))){
+        int i = 0;
+        ListOfLists dbListOfLists = dbHandler.databaseAllLists();
+        while(i<dbListOfLists.getItemListLength()){
 
             Button button = new Button(this.getActivity());
 
-            button.setText(dbHandler.getList(i).getName());
+            button.setText(dbListOfLists.getItem(i).getName());
             button.setGravity(Gravity.CENTER);
             button.setLayoutParams(new LinearLayout.LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT));
             button.setOnClickListener(new View.OnClickListener() {

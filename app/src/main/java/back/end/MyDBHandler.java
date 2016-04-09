@@ -9,6 +9,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 import android.database.Cursor;
 import android.content.Context;
 import android.content.ContentValues;
+import android.util.Log;
 
 public class MyDBHandler extends SQLiteOpenHelper{
 
@@ -87,7 +88,7 @@ public class MyDBHandler extends SQLiteOpenHelper{
     // delete item by name
     public void deleteItem(String itemName){
         SQLiteDatabase db = getWritableDatabase();
-        db.execSQL("DELETE FROM " + TABLE_ITEMS + " WHERE " + COLUMN_ITEM_NAME + "=\"" + itemName + "\";");
+        db.execSQL("DELETE FROM " + TABLE_ITEMS + " WHERE " + COLUMN_ITEM_NAME + "=\"" + itemName.toLowerCase().trim() + "\";");
     }
     // delete item by id
     public void deleteItem(int id){
@@ -97,7 +98,7 @@ public class MyDBHandler extends SQLiteOpenHelper{
     // delete list by name
     public void deleteList(String listName){
         SQLiteDatabase db = getWritableDatabase();
-        db.execSQL("DELETE FROM " + TABLE_LISTS + " WHERE " + COLUMN_LIST_NAME + "=\"" + listName + "\";");
+        db.execSQL("DELETE FROM " + TABLE_LISTS + " WHERE " + COLUMN_LIST_NAME + "=\"" + listName.toLowerCase().trim() + "\";");
     }
     // delete list by id
     public void deleteList(int id){
@@ -181,24 +182,53 @@ public class MyDBHandler extends SQLiteOpenHelper{
         }
     }
     // print out the database
-    public String databaseToString(){
+    public itemList databaseGetList(){
         String dbString = "";
+        itemList dbItemList = new itemList();
         SQLiteDatabase db = getWritableDatabase();
         String query = "SELECT * FROM " + TABLE_ITEMS + " WHERE 1";
         // cursor points to location in results
         Cursor c = db.rawQuery(query,null);
         // move cursor to first location
         c.moveToFirst();
-
         while(!c.isAfterLast()){
             if(c.getString(c.getColumnIndex("name"))!=null){
-                dbString += c.getString(c.getColumnIndex("name"));
-                dbString += "\n";
+                item dbItem = new item();
+                dbString = c.getString(c.getColumnIndex("name"));
+                dbItem.setName(dbString);
+                dbItem.setQuantity(c.getInt(c.getColumnIndex("quantity")));
+                dbItem.setPounds(c.getInt(c.getColumnIndex("pounds")));
+                dbItem.setPennies(c.getInt(c.getColumnIndex("pennies")));
+                dbItem.setTotalPrice(c.getDouble(c.getColumnIndex("price")));
+                dbItemList.addItem(dbItem);
             }
+            c.moveToNext();
         }
         c.moveToNext();
         db.close();
 
-        return dbString;
+        return dbItemList;
+    }
+    public ListOfLists databaseAllLists(){
+        String dbString = "";
+        SQLiteDatabase db = getWritableDatabase();
+        ListOfLists dbListOfLists = new ListOfLists();
+        String query = "SELECT * FROM " + TABLE_LISTS + " WHERE 1";
+        // cursor points to location in results
+        Cursor c = db.rawQuery(query,null);
+        // move cursor to first location
+        c.moveToFirst();
+        while(!c.isAfterLast()){
+            if(c.getString(c.getColumnIndex("name"))!=null){
+                itemList dbItemList = new itemList();
+                dbString = c.getString(c.getColumnIndex("name"));
+                dbListOfLists.addItem(dbItemList);
+            }
+            c.moveToNext();
+        }
+        c.moveToNext();
+        db.close();
+
+        return dbListOfLists;
     }
 }

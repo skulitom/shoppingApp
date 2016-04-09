@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -35,22 +36,35 @@ public class ListFragment extends Fragment implements View.OnClickListener{
         // Create a LinearLayout element
         final LinearLayout linearLayout = (LinearLayout)view.findViewById(R.id.LinearLayoutScrollCL);
 
-            int i = 1;
+            int i = 0;
+            itemList dbItemList = dbHandler.databaseGetList();
 
-            while(dbHandler.checkListNull(dbHandler.getItem(i))){
+            while(i<dbItemList.getItemListLength()){
                 PriceColor priceColor = new PriceColor();
                 final Button button = new Button(this.getActivity());
-                String bText = dbHandler.getItem(i).getName()+" : £"+dbHandler.getItem(i).getTotalPrice();
+                final String buttonName = dbItemList.getItem(i).getName().toLowerCase().trim();
+                String bText = dbItemList.getItem(i).getName()+" : £"+dbItemList.getItem(i).getTotalPrice();
+                Log.d("movie:android",dbItemList.getItem(i).getName());
                 button.setText(bText);
                 button.setGravity(Gravity.CENTER);
                 button.setBackgroundColor(Color.argb(50, 0, 0, 100));
-                button.setTextColor(Color.rgb(0, priceColor.getItemGreen(dbHandler.getItem(i).getTotalPrice()), 0));
+                button.setTextColor(Color.rgb(0, priceColor.getItemGreen(dbItemList.getItem(i).getTotalPrice()), 0));
                 button.setHighlightColor(Color.DKGRAY);
                 button.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
                 button.setOnClickListener(new View.OnClickListener() {
 
                     public void onClick(View v) {
-                        linearLayout.removeView(button);
+                        button.setText("Delete Item?");
+                        button.setTextColor(Color.BLACK);
+                        button.setBackgroundResource(android.R.drawable.btn_default);
+                        button.setOnClickListener(new View.OnClickListener() {
+
+                            public void onClick(View v) {
+                                dbHandler.deleteItem(buttonName);
+                                Log.d("android:HELP",buttonName);
+                                linearLayout.removeView(button);
+                            }
+                        });
                     }
                 });
                 linearLayout.addView(button);
