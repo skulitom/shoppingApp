@@ -45,6 +45,12 @@ public class SavedListsFragment extends Fragment {
             button.setText(dbHandler.getList(i).getName());
             button.setGravity(Gravity.CENTER);
             button.setLayoutParams(new LinearLayout.LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT));
+            button.setOnClickListener(new View.OnClickListener() {
+
+                public void onClick(View v) {
+                    //todo
+                }
+            });
             linearLayout.addView(button);
 
             i++;

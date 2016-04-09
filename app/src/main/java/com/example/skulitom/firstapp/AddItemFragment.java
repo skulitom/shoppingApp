@@ -34,12 +34,12 @@ public class AddItemFragment extends Fragment implements View.OnClickListener{
             sugestion.setText(dictionary.getCoresponFood(editTextName.getText().toString()));
             boolean exists=false;
             int i = 1;
-           /* while(dbHandler.checkListNull(dbHandler.getItem(i))){
-                if(dbHandler.getItem(i).getName().equals(editTextName.getText().toString())){
+            while(dbHandler.checkListNull(dbHandler.getItem(i))){
+                if(dbHandler.getItem(i).getName().toLowerCase().trim().equals(editTextName.getText().toString().toLowerCase().trim())){
                     exists = true;
                 }
                 i++;
-            }*/
+            }
             if(exists){
                 editTextName.setError("Item already exists");
             }
@@ -63,6 +63,7 @@ public class AddItemFragment extends Fragment implements View.OnClickListener{
         sugestion = (TextView)  view.findViewById(R.id.sugestText);
         editTextName = (EditText) view.findViewById(R.id.editTextName);
         editTextName.addTextChangedListener(dictionaryWatcher);
+        dbHandler = new MyDBHandler(getActivity(),null,null,1);
         Button doneButton = (Button) view.findViewById(R.id.doneButton);
         doneButton.setOnClickListener(this);
 
@@ -102,7 +103,6 @@ public class AddItemFragment extends Fragment implements View.OnClickListener{
             currentItem.setPennies(pennies);
             currentItem.setQuantity(quantitySeekBar.getProgress());
             currentItem.setTotalPrice(price);
-            dbHandler = new MyDBHandler(getActivity(),null,null,1);
             dbHandler.addItem(currentItem);
 
 

@@ -33,20 +33,26 @@ public class ListFragment extends Fragment implements View.OnClickListener{
 
         dbHandler = new MyDBHandler(getActivity(),null,null,1);
         // Create a LinearLayout element
-        LinearLayout linearLayout = (LinearLayout)view.findViewById(R.id.LinearLayoutScrollCL);
+        final LinearLayout linearLayout = (LinearLayout)view.findViewById(R.id.LinearLayoutScrollCL);
 
             int i = 1;
 
             while(dbHandler.checkListNull(dbHandler.getItem(i))){
                 PriceColor priceColor = new PriceColor();
-                Button button = new Button(this.getActivity());
+                final Button button = new Button(this.getActivity());
                 String bText = dbHandler.getItem(i).getName()+" : £"+dbHandler.getItem(i).getTotalPrice();
                 button.setText(bText);
                 button.setGravity(Gravity.CENTER);
-                button.setBackgroundColor(Color.argb(50,0,0,100));
-                button.setTextColor(Color.rgb(0,priceColor.getItemGreen(dbHandler.getItem(i).getTotalPrice()),0));
+                button.setBackgroundColor(Color.argb(50, 0, 0, 100));
+                button.setTextColor(Color.rgb(0, priceColor.getItemGreen(dbHandler.getItem(i).getTotalPrice()), 0));
                 button.setHighlightColor(Color.DKGRAY);
                 button.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
+                button.setOnClickListener(new View.OnClickListener() {
+
+                    public void onClick(View v) {
+                        linearLayout.removeView(button);
+                    }
+                });
                 linearLayout.addView(button);
 
                 i++;
