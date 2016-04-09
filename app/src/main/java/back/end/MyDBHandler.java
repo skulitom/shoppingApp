@@ -65,6 +65,12 @@ public class MyDBHandler extends SQLiteOpenHelper{
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_LISTS);
         onCreate(db);
     }
+
+    public void dropList(){
+        SQLiteDatabase db = getWritableDatabase();
+        db.execSQL("DROP TABLE IF EXISTS " + TABLE_ITEMS);
+        onCreate(db);
+    }
     // add an item to database
     public void addItem(item item){
         ContentValues values = new ContentValues();
@@ -222,6 +228,7 @@ public class MyDBHandler extends SQLiteOpenHelper{
             if(c.getString(c.getColumnIndex("name"))!=null){
                 itemList dbItemList = new itemList();
                 dbString = c.getString(c.getColumnIndex("name"));
+                dbItemList.setName(dbString);
                 dbListOfLists.addItem(dbItemList);
             }
             c.moveToNext();

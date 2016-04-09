@@ -6,6 +6,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -48,7 +49,17 @@ public class SavedListsFragment extends Fragment {
             button.setOnClickListener(new View.OnClickListener() {
 
                 public void onClick(View v) {
-                    //todo
+                    Fragment fragment = null;
+                    Class fragmentClass = ListFragment.class;
+                    try {
+                        fragment = (Fragment)fragmentClass.newInstance();
+                        //dbHandler.dropList();
+                    }catch(Exception e){
+                        e.printStackTrace();
+                    }
+                    FragmentManager fragmentManager = getFragmentManager();
+                    fragmentManager.beginTransaction().replace(R.id.frame_container, fragment).commit();
+
                 }
             });
             linearLayout.addView(button);

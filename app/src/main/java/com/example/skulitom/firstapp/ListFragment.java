@@ -31,6 +31,8 @@ public class ListFragment extends Fragment implements View.OnClickListener{
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_list, container,false);
+        Currency currency = new Currency();
+        currency.setCurrency(((MainActivity)getActivity()).getLang());
 
         dbHandler = new MyDBHandler(getActivity(),null,null,1);
         // Create a LinearLayout element
@@ -43,7 +45,7 @@ public class ListFragment extends Fragment implements View.OnClickListener{
                 PriceColor priceColor = new PriceColor();
                 final Button button = new Button(this.getActivity());
                 final String buttonName = dbItemList.getItem(i).getName().toLowerCase().trim();
-                String bText = dbItemList.getItem(i).getName()+" : £"+dbItemList.getItem(i).getTotalPrice();
+                String bText = dbItemList.getItem(i).getName()+" : "+currency.getSymbol()+dbItemList.getItem(i).getTotalPrice();
                 Log.d("movie:android",dbItemList.getItem(i).getName());
                 button.setText(bText);
                 button.setGravity(Gravity.CENTER);

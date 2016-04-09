@@ -21,6 +21,7 @@ import back.end.*;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
+    private int LANGUAGE = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,6 +49,7 @@ public class MainActivity extends AppCompatActivity
         }
         FragmentManager fragmentManager = getSupportFragmentManager();
         fragmentManager.beginTransaction().replace(R.id.frame_container, fragment).commit();
+
 
     }
 
@@ -117,21 +119,13 @@ public class MainActivity extends AppCompatActivity
         return true;
     }
 
-    @Override
-    protected void onPause() {
-        super.onPause();
-        /*
-        MyDBHandler dbHandler = new MyDBHandler(this,null,null,1);
-
-
-
-        int i = 1;
-        while(dbHandler.checkListNull(dbHandler.getItem(i))){
-            dbHandler.deleteItem(i);
-            i++;
-        }
-        */
-
-
+    public int getLang(){
+         return LANGUAGE;
     }
+
+    public void setLang(int lang){
+        LANGUAGE = lang;
+    }
+
+
 }

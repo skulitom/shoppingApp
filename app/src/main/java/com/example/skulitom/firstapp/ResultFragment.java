@@ -20,6 +20,7 @@ import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
+import back.end.Currency;
 import back.end.MyDBHandler;
 import back.end.NumberToWord;
 import back.end.PriceColor;
@@ -36,6 +37,9 @@ public class ResultFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_result, container,false);
         ScrollView scroll = (ScrollView) view.findViewById(R.id.scrollViewResult);
         RelativeLayout linearLayout = (RelativeLayout)view.findViewById(R.id.RelativeLayoutScrollResult);
+
+        Currency currency = new Currency();
+        currency.setCurrency(((MainActivity)getActivity()).getLang());
 
         //linearLayout.addView(drawRects);
         Rectangle rect = new Rectangle(getActivity());
@@ -67,7 +71,7 @@ public class ResultFragment extends Fragment {
         total.setTextColor(Color.rgb(priceColor.getRed(holdTotal),priceColor.getGreen(holdTotal),0));
         ////
 
-        total.setText(pounds.substring(0,1).toUpperCase()+pounds.substring(1) + " pounds and " + pennies+" pence.");
+        total.setText(pounds.substring(0,1).toUpperCase()+pounds.substring(1) + " "+ currency.getBigCurrency()+" and " + pennies+" "+currency.getSmallCurrency()+" .");
 
         return view;
     }
