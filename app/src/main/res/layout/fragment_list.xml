@@ -32,6 +32,9 @@
         android:layout_marginTop="-120dp"
         android:layout_marginBottom="60dp"
         android:gravity="center"
+        android:background="@android:color/darker_gray"
+        android:textColor="#ffffff"
+        android:backgroundTint="@android:color/holo_blue_light"
          />
 
 
@@ -40,8 +43,10 @@
         android:layout_height="wrap_content"
         android:text="@string/saveButton"
         android:id="@+id/saveButton"
-        android:layout_marginTop="-60dp"
-
-        android:gravity="center" />
+        android:layout_marginTop="-55dp"
+        android:gravity="center"
+        android:background="@android:color/darker_gray"
+        android:textColor="#ffffff"
+        android:backgroundTint="@android:color/holo_blue_light"/>
 
 </LinearLayout>

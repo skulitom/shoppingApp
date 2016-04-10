@@ -26,6 +26,7 @@ public class AddItemFragment extends Fragment implements View.OnClickListener{
     private View view;
     MyDBHandler dbHandler;
     TextView sugestion;
+    TextView quantityText;
     EditText editTextName;
     Switch switchA;
     SeekBar seekBarA;
@@ -67,12 +68,37 @@ public class AddItemFragment extends Fragment implements View.OnClickListener{
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_add_item, container,false);
+        quantityText = (TextView) view.findViewById(R.id.quantityText);
         relativeLayout = (RelativeLayout) view.findViewById(R.id.AddItemRelativeLayout);
         sugestion = (TextView)  view.findViewById(R.id.sugestText);
         editTextName = (EditText) view.findViewById(R.id.editTextName);
         editTextName.addTextChangedListener(dictionaryWatcher);
         dbHandler = new MyDBHandler(getActivity(),null,null,1);
         seekBarA = (SeekBar) view.findViewById(R.id.seekBar);
+        seekBarA.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+                // TODO Auto-generated method stub
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+                // TODO Auto-generated method stub
+            }
+
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int progress,boolean fromUser) {
+                // TODO Auto-generated method stub
+                int quantity = 0;
+                quantity = seekBar.getProgress();
+                String text = "";
+                NumberToWord numberToWord = new NumberToWord();
+                text = numberToWord.convert(quantity);
+                quantityText.setText(text);
+
+            }
+        });
         switchA = (Switch) view.findViewById(R.id.switchQuantity);
         switchA.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {

@@ -2,6 +2,7 @@ package com.example.skulitom.firstapp;
 
 import android.app.ActionBar;
 import android.content.Context;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -52,9 +53,9 @@ public class SavedListsFragment extends Fragment {
                     Fragment fragment = null;
                     Class fragmentClass = ListFragment.class;
                     try {
-                        fragment = (Fragment)fragmentClass.newInstance();
+                        fragment = (Fragment) fragmentClass.newInstance();
                         //dbHandler.dropList();
-                    }catch(Exception e){
+                    } catch (Exception e) {
                         e.printStackTrace();
                     }
                     FragmentManager fragmentManager = getFragmentManager();

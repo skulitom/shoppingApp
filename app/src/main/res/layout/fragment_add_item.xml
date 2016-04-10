@@ -58,7 +58,10 @@
         android:layout_alignStart="@+id/editTextPrice"
         android:layout_marginTop="47dp"
         android:layout_alignRight="@+id/editTextPrice"
-        android:layout_alignEnd="@+id/editTextPrice" />
+        android:layout_alignEnd="@+id/editTextPrice"
+        android:background="@android:color/darker_gray"
+        android:textColor="#ffffff"
+        android:backgroundTint="@android:color/holo_blue_light"/>
 
     <TextView
         android:layout_width="wrap_content"
@@ -122,5 +125,15 @@
         android:layout_centerHorizontal="true"
         android:textColor="#bd1f4df3"
         android:text="tuna" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Zero"
+        android:id="@+id/quantityText"
+        android:layout_alignBottom="@+id/seekBar"
+        android:layout_toRightOf="@+id/seekBar"
+        android:layout_toEndOf="@+id/seekBar" />
 
 </RelativeLayout>
