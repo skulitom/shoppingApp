@@ -12,7 +12,6 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.EditText;
-import android.widget.MultiAutoCompleteTextView;
 import android.widget.RelativeLayout;
 import android.widget.SeekBar;
 import android.widget.Switch;
@@ -31,10 +30,9 @@ public class AddItemFragment extends Fragment implements View.OnClickListener{
     private Switch switchA;
     private SeekBar seekBarA;
     private RelativeLayout relativeLayout;
-    //SeekBar quantitySeekBar = (SeekBar) findViewById(R.id.seekBar);
 
     private TextWatcher dictionaryWatcher = new TextWatcher() {
-
+        ////- V Below is a input listener for current item name inputed V
         @Override
         public void afterTextChanged(Editable s) {
             ProductsDictionary dictionary = ProductsDictionary.getInstance();
@@ -52,7 +50,8 @@ public class AddItemFragment extends Fragment implements View.OnClickListener{
                 editTextName.setError("Item already exists");
             }
         }
-
+        ////
+        
         @Override
         public void beforeTextChanged(CharSequence s, int start, int count, int after) {
         }
@@ -79,17 +78,14 @@ public class AddItemFragment extends Fragment implements View.OnClickListener{
 
             @Override
             public void onStopTrackingTouch(SeekBar seekBar) {
-                // TODO Auto-generated method stub
             }
 
             @Override
             public void onStartTrackingTouch(SeekBar seekBar) {
-                // TODO Auto-generated method stub
             }
 
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress,boolean fromUser) {
-                // TODO Auto-generated method stub
                 int quantity = 0;
                 quantity = seekBar.getProgress();
                 String text = "";
