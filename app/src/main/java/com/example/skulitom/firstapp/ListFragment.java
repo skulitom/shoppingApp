@@ -22,10 +22,8 @@ import back.end.*;
 
 
 public class ListFragment extends Fragment implements View.OnClickListener{
-   // Button addItemButton;
-//    Button saveButton;
 
-    MyDBHandler dbHandler;
+    private MyDBHandler dbHandler;
 
     @Nullable
     @Override
@@ -49,7 +47,7 @@ public class ListFragment extends Fragment implements View.OnClickListener{
                 Log.d("movie:android",dbItemList.getItem(i).getName());
                 button.setText(bText);
                 button.setGravity(Gravity.CENTER);
-                button.setBackgroundColor(Color.argb(50, 0, 0, 100));
+                button.setBackgroundColor(Color.argb(100, 100, 100, 100));
                 button.setTextColor(Color.rgb(0, priceColor.getItemGreen(dbItemList.getItem(i).getTotalPrice()), 0));
                 button.setHighlightColor(Color.DKGRAY);
                 button.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));

@@ -218,6 +218,7 @@ public class MyDBHandler extends SQLiteOpenHelper{
     public ListOfLists databaseAllLists(){
         String dbString = "";
         SQLiteDatabase db = getWritableDatabase();
+
         ListOfLists dbListOfLists = new ListOfLists();
         String query = "SELECT * FROM " + TABLE_LISTS + " WHERE 1";
         // cursor points to location in results

@@ -16,7 +16,7 @@ import back.end.MyDBHandler;
 
 
 public class HomeFragment extends Fragment implements View.OnClickListener{
-    Button startButton;
+    private Button startButton;
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {

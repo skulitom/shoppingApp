@@ -29,7 +29,7 @@ import back.end.itemList;
 
 public class ResultFragment extends Fragment {
 
-        MyDBHandler dbHandler;
+    private MyDBHandler dbHandler;
 
     @Nullable
     @Override

@@ -24,20 +24,20 @@ import back.end.*;
 
 public class AddItemFragment extends Fragment implements View.OnClickListener{
     private View view;
-    MyDBHandler dbHandler;
-    TextView sugestion;
-    TextView quantityText;
-    EditText editTextName;
-    Switch switchA;
-    SeekBar seekBarA;
-    RelativeLayout relativeLayout;
+    private MyDBHandler dbHandler;
+    private TextView sugestion;
+    private TextView quantityText;
+    private EditText editTextName;
+    private Switch switchA;
+    private SeekBar seekBarA;
+    private RelativeLayout relativeLayout;
     //SeekBar quantitySeekBar = (SeekBar) findViewById(R.id.seekBar);
 
     private TextWatcher dictionaryWatcher = new TextWatcher() {
 
         @Override
         public void afterTextChanged(Editable s) {
-            ProductsDictionary dictionary = new ProductsDictionary();
+            ProductsDictionary dictionary = ProductsDictionary.getInstance();
             sugestion.setText(dictionary.getCoresponFood(editTextName.getText().toString()));
             boolean exists=false;
             int i = 0;

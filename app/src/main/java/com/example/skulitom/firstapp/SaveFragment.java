@@ -16,8 +16,8 @@ import back.end.*;
 
 public class
         SaveFragment extends Fragment implements View.OnClickListener{
-    View view;
-    MyDBHandler dbHandler;
+    private View view;
+    private MyDBHandler dbHandler;
 
     @Nullable
     @Override

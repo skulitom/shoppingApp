@@ -5,7 +5,7 @@ import java.util.ArrayList;
 /**
  * Created by skulitom on 03/03/2016.
  */
-public class ListOfLists {
+public class ListOfLists implements ShoppingList{
     private String _name;
     private ArrayList<itemList> _list = new ArrayList<itemList>();
 

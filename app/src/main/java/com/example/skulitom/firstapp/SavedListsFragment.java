@@ -21,8 +21,8 @@ import back.end.*;
 
 
 public class SavedListsFragment extends Fragment {
-    View view;
-    MyDBHandler dbHandler;
+    private View view;
+    private MyDBHandler dbHandler;
 
     @Nullable
     @Override
