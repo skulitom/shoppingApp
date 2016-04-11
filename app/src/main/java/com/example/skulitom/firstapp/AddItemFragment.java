@@ -30,9 +30,8 @@ public class AddItemFragment extends Fragment implements View.OnClickListener{
     private Switch switchA;
     private SeekBar seekBarA;
     private RelativeLayout relativeLayout;
-
+    ////- V Below is a input listener for current item name inputed V
     private TextWatcher dictionaryWatcher = new TextWatcher() {
-        ////- V Below is a input listener for current item name inputed V
         @Override
         public void afterTextChanged(Editable s) {
             ProductsDictionary dictionary = ProductsDictionary.getInstance();
@@ -41,6 +40,7 @@ public class AddItemFragment extends Fragment implements View.OnClickListener{
             int i = 0;
             itemList dbItemList = dbHandler.databaseGetList();
             while(i<dbItemList.getItemListLength()){
+                // cehcks if any items in the current list are equivalent to the item typed in is so exists becomes true
                 if(dbItemList.getItem(i).getName().toLowerCase().trim().equals(editTextName.getText().toString().toLowerCase().trim())){
                     exists = true;
                 }
@@ -50,8 +50,7 @@ public class AddItemFragment extends Fragment implements View.OnClickListener{
                 editTextName.setError("Item already exists");
             }
         }
-        ////
-        
+
         @Override
         public void beforeTextChanged(CharSequence s, int start, int count, int after) {
         }
@@ -63,9 +62,13 @@ public class AddItemFragment extends Fragment implements View.OnClickListener{
         }
 
     };
+    ////
+
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        ////- initiate visual objects
         view = inflater.inflate(R.layout.fragment_add_item, container,false);
         quantityText = (TextView) view.findViewById(R.id.quantityText);
         relativeLayout = (RelativeLayout) view.findViewById(R.id.AddItemRelativeLayout);
@@ -74,6 +77,10 @@ public class AddItemFragment extends Fragment implements View.OnClickListener{
         editTextName.addTextChangedListener(dictionaryWatcher);
         dbHandler = new MyDBHandler(getActivity(),null,null,1);
         seekBarA = (SeekBar) view.findViewById(R.id.seekBar);
+        switchA = (Switch) view.findViewById(R.id.switchQuantity);
+        Button doneButton = (Button) view.findViewById(R.id.doneButton);
+        ////
+        ////- seekBar listener
         seekBarA.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
 
             @Override
@@ -95,7 +102,8 @@ public class AddItemFragment extends Fragment implements View.OnClickListener{
 
             }
         });
-        switchA = (Switch) view.findViewById(R.id.switchQuantity);
+        ////
+        ////- switch listener
         switchA.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (isChecked) {
@@ -107,7 +115,7 @@ public class AddItemFragment extends Fragment implements View.OnClickListener{
                 }
             }
         });
-        Button doneButton = (Button) view.findViewById(R.id.doneButton);
+        ////
         doneButton.setOnClickListener(this);
 
 
