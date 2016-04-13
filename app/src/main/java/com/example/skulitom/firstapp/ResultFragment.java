@@ -28,7 +28,7 @@ import back.end.itemList;
 
 
 public class ResultFragment extends Fragment {
-
+    // text to speech api
     private MyDBHandler dbHandler;
 
     @Nullable

@@ -9,7 +9,7 @@ public class item {
     private int _pennies = 0;
     private int _quantity = 0;
     private double _totalPrice = 0;
-
+    // name of item
     public void setName(String _name){
         this._name = _name;
     }
