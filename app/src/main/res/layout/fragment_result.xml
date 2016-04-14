@@ -8,26 +8,6 @@
     <!-- TODO: Update blank fragment layout -->
 
 
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginTop="60dp"
-        android:id="@+id/scrollViewResult" >
-
-        <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-            xmlns:tools="http://schemas.android.com/tools"
-            android:id="@+id/RelativeLayoutScrollResult"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content" >
-
-
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/imageViewResult" />
-        </RelativeLayout>
-    </ScrollView>
-
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
@@ -44,6 +24,21 @@
         android:layout_marginLeft="34dp"
         android:layout_marginStart="34dp"
         android:layout_alignParentBottom="true"
- />
+        android:textSize="24dp"
+        android:textIsSelectable="true" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Say Total"
+        android:id="@+id/resultSpeakButton"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="192dp"
+        android:background="@android:color/darker_gray"
+        android:textColor="#ffffff"
+        android:backgroundTint="@android:color/holo_blue_light"
+        android:textSize="32dp"
+        android:padding="15dp" />
 
 </RelativeLayout>

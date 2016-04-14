@@ -59,7 +59,8 @@
         android:layout_toEndOf="@+id/textView4"
         android:background="@android:color/darker_gray"
         android:textColor="#ffffff"
-        android:backgroundTint="@android:color/holo_blue_light"/>
+        android:backgroundTint="@android:color/holo_blue_light"
+        android:textSize="24dp" />
 
     <Button
         android:layout_width="wrap_content"
@@ -73,7 +74,8 @@
         android:layout_toStartOf="@+id/textView4"
         android:background="@android:color/darker_gray"
         android:textColor="#ffffff"
-        android:backgroundTint="@android:color/holo_blue_light"/>
+        android:backgroundTint="@android:color/holo_blue_light"
+        android:textSize="24dp" />
 
     <TextView
         android:layout_width="wrap_content"

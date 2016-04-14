@@ -145,15 +145,15 @@ public class AddItemFragment extends Fragment implements View.OnClickListener{
         if(editTextPrice.getText().toString().trim().length() > 0 && editTextName.getText().toString().trim().length() > 0) {
             currentItem.setName(editTextName.getText().toString());
             double price = 0;
-            int quantity = 1;
+            int quantity = quantitySeekBar.getProgress();
             try {
                 price = Double.parseDouble(editTextPrice.getText().toString());
             }catch(NumberFormatException e){}
             int pennies = (int)((price-(int)Math.floor(price))*100);
             currentItem.setPounds((int) Math.floor(price));
             currentItem.setPennies(pennies);
-            currentItem.setQuantity(quantitySeekBar.getProgress());
-            currentItem.setTotalPrice(price);
+            currentItem.setQuantity(quantity);
+            currentItem.setTotalPrice(price/quantity);
             dbHandler.addItem(currentItem);
 
 

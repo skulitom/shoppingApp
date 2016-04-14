@@ -61,7 +61,8 @@
         android:layout_alignEnd="@+id/editTextPrice"
         android:background="@android:color/darker_gray"
         android:textColor="#ffffff"
-        android:backgroundTint="@android:color/holo_blue_light"/>
+        android:backgroundTint="@android:color/holo_blue_light"
+        android:textSize="24dp" />
 
     <TextView
         android:layout_width="wrap_content"

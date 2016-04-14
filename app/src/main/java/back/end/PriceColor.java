@@ -13,11 +13,11 @@ public class PriceColor {
     private static final int greenLevel6 = 255;
     ////
     ////- Button Text green
-    private static final int greenButtonLevel1 = 40;
-    private static final int greenButtonLevel2 = 90;
-    private static final int greenButtonLevel3 = 140;
-    private static final int greenButtonLevel4 = 180;
-    private static final int greenButtonLevel5 = 205;
+    private static final int greenButtonLevel1 = 170;
+    private static final int greenButtonLevel2 = 180;
+    private static final int greenButtonLevel3 = 190;
+    private static final int greenButtonLevel4 = 200;
+    private static final int greenButtonLevel5 = 225;
     private static final int greenButtonLevel6 = 255;
     ////
 

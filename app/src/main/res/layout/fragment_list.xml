@@ -35,7 +35,7 @@
         android:background="@android:color/darker_gray"
         android:textColor="#ffffff"
         android:backgroundTint="@android:color/holo_blue_light"
-         />
+        android:textSize="24dp" />
 
 
     <Button
@@ -47,6 +47,7 @@
         android:gravity="center"
         android:background="@android:color/darker_gray"
         android:textColor="#ffffff"
-        android:backgroundTint="@android:color/holo_blue_light"/>
+        android:backgroundTint="@android:color/holo_blue_light"
+        android:textSize="24dp" />
 
 </LinearLayout>

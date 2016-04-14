@@ -43,11 +43,11 @@ public class ListFragment extends Fragment implements View.OnClickListener{
                 PriceColor priceColor = new PriceColor();
                 final Button button = new Button(this.getActivity());
                 final String buttonName = dbItemList.getItem(i).getName().toLowerCase().trim();
-                String bText = dbItemList.getItem(i).getName()+" : "+currency.getSymbol()+dbItemList.getItem(i).getTotalPrice();
+                String bText = dbItemList.getItem(i).getName()+" : "+currency.getSymbol()+addZeroToDouble(dbItemList.getItem(i).getTotalPrice());
                 Log.d("movie:android",dbItemList.getItem(i).getName());
                 button.setText(bText);
                 button.setGravity(Gravity.CENTER);
-                button.setBackgroundColor(Color.argb(100, 100, 100, 100));
+                button.setBackgroundColor(Color.rgb(255, 255, 255));
                 button.setTextColor(Color.rgb(0, priceColor.getItemGreen(dbItemList.getItem(i).getTotalPrice()), 0));
                 button.setHighlightColor(Color.DKGRAY);
                 button.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
@@ -110,5 +110,15 @@ public class ListFragment extends Fragment implements View.OnClickListener{
         fragmentManager.beginTransaction().replace(R.id.frame_container, fragment).commit();
 
 
+    }
+
+    String addZeroToDouble(Double number){
+        String result = "";
+        Double roundedNumber = Math.floor(number)+((double)Math.round((number - Math.floor(number))*100))/100;
+        result = Double.toString(roundedNumber);
+        if(result.charAt(result.length()-2)=='.'){
+            result+="0";
+        }
+        return result;
     }
 }
