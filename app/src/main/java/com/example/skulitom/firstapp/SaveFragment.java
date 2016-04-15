@@ -40,13 +40,9 @@ public class
 
         if(editTextName.getText().toString().trim().length() > 0) {
 
+            currentList = dbHandler.databaseGetList("Current List");
             currentList.setName(editTextName.getText().toString());
 
-            int i = 1;
-            while(dbHandler.checkListNull(dbHandler.getItem(i))){
-                currentList.addItem(dbHandler.getItem(i));
-                i++;
-            }
             dbHandler.addList(currentList);
 
             switch (v.getId()) {

@@ -60,7 +60,7 @@ public class ResultFragment extends Fragment {
         ////- retrieve all items
         int i = 0;
         double holdTotal = 0;
-        itemList dbItemList = dbHandler.databaseGetList();
+        itemList dbItemList = dbHandler.databaseGetList("Current List");
         while(i<dbItemList.getItemListLength()){
             holdTotal += dbItemList.getItem(i).getTotalPrice();
             i++;

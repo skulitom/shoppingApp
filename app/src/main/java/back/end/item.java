@@ -5,6 +5,7 @@ package back.end;
  */
 public class item {
     private String _name = "";
+    private String _listName = "";
     private int _pounds = 0;
     private int _pennies = 0;
     private int _quantity = 0;
@@ -28,6 +29,10 @@ public class item {
 
     public void setTotalPrice(double _totalPrice){this._totalPrice = _totalPrice*this._quantity;}
 
+    public void setListName(String _name){
+        this._listName=_name;
+    }
+
 //
 
     public double getTotalPrice(){return _totalPrice;}
@@ -40,5 +45,8 @@ public class item {
     }
     public int getQuantity(){
         return _quantity;
+    }
+    public String getListName(){
+        return _listName;
     }
 }

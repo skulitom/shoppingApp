@@ -37,7 +37,7 @@ public class ListFragment extends Fragment implements View.OnClickListener{
         final LinearLayout linearLayout = (LinearLayout)view.findViewById(R.id.LinearLayoutScrollCL);
 
             int i = 0;
-            itemList dbItemList = dbHandler.databaseGetList();
+            itemList dbItemList = dbHandler.databaseGetList("Current List");
 
             while(i<dbItemList.getItemListLength()){
                 PriceColor priceColor = new PriceColor();

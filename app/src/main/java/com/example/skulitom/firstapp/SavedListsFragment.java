@@ -42,7 +42,7 @@ public class SavedListsFragment extends Fragment {
         ListOfLists dbListOfLists = dbHandler.databaseAllLists();
         while(i<dbListOfLists.getItemListLength()){
 
-            Button button = new Button(this.getActivity());
+            final Button button = new Button(this.getActivity());
 
             button.setText(dbListOfLists.getItem(i).getName());
             button.setGravity(Gravity.CENTER);
@@ -50,6 +50,14 @@ public class SavedListsFragment extends Fragment {
             button.setOnClickListener(new View.OnClickListener() {
 
                 public void onClick(View v) {
+                    itemList itemList = dbHandler.databaseGetList(button.getText().toString());
+                    dbHandler.dropList();
+                    for(int i = 0; i<itemList.getItemListLength();i++){
+                        item item;
+                        item = itemList.getItem(i);
+                        item.setListName("Current List");
+                        dbHandler.addItem(item);
+                    }
                     Fragment fragment = null;
                     Class fragmentClass = ListFragment.class;
                     try {

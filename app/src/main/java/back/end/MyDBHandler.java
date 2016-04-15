@@ -13,7 +13,7 @@ import android.util.Log;
 
 public class MyDBHandler extends SQLiteOpenHelper{
 
-    private static final int DATABASE_VERSION = 4;
+    private static final int DATABASE_VERSION = 6;
     private static final String DATABASE_NAME = "shopingLists.db";
     ///////////////////////////////////////////////////////////// - item values
     public static final String TABLE_ITEMS = "items";
@@ -23,11 +23,12 @@ public class MyDBHandler extends SQLiteOpenHelper{
     public static final String COLUMN_ITEM_POUNDS = "pounds";
     public static final String COLUMN_ITEM_PENNIES = "pennies";
     public static final String COLUMN_ITEM_QUANTITY = "quantity";
+    public static final String COLUMN_ITEM_LIST = "listName";
     ///////////////////////////////////////////////////////////// - list values
     public static final String COLUMN_LIST_ID = "listId";
     public static final String TABLE_LISTS = "lists";
     public static final String COLUMN_LIST_NAME = "name";
-    public static final String COLUMN_LIST_ITEM = "itenInList";
+
 
     public MyDBHandler(Context context, String name, SQLiteDatabase.CursorFactory factory, int version) {
         super(context, DATABASE_NAME, factory, DATABASE_VERSION);
@@ -43,15 +44,14 @@ public class MyDBHandler extends SQLiteOpenHelper{
                 COLUMN_ITEM_TOTAL_PRICE + " REAL " + "," +
                 COLUMN_ITEM_POUNDS + " INTEGER " + "," +
                 COLUMN_ITEM_PENNIES + " INTEGER " + "," +
-                COLUMN_ITEM_QUANTITY + " INTEGER " +
+                COLUMN_ITEM_QUANTITY + " INTEGER " + "," +
+                COLUMN_ITEM_LIST + " TEXT " +
                 ");";
 
         // create a list table
         String queryList = "CREATE TABLE " + TABLE_LISTS + "(" +
                 COLUMN_LIST_ID + " INTEGER PRIMARY KEY AUTOINCREMENT " + "," +
                 COLUMN_LIST_NAME + " TEXT " +
-      //          COLUMN_ITEM_ID + " INTEGER " + "," +
-     //           "FOREIGN KEY("+COLUMN_LIST_ITEM+") REFERENCES "+ TABLE_ITEMS+"("+COLUMN_ITEM_ID+")"+
                 ");";
 
         db.execSQL(queryItem);
@@ -68,8 +68,7 @@ public class MyDBHandler extends SQLiteOpenHelper{
 
     public void dropList(){
         SQLiteDatabase db = getWritableDatabase();
-        db.execSQL("DROP TABLE IF EXISTS " + TABLE_ITEMS);
-        onCreate(db);
+        db.execSQL("DELETE FROM " + TABLE_ITEMS + " WHERE " + COLUMN_ITEM_LIST + "=\"" + "Current List" + "\";");
     }
     // add an item to database
     public void addItem(item item){
@@ -80,6 +79,7 @@ public class MyDBHandler extends SQLiteOpenHelper{
         values.put(COLUMN_ITEM_TOTAL_PRICE, item.getTotalPrice());
         values.put(COLUMN_ITEM_POUNDS, item.getPounds());
         values.put(COLUMN_ITEM_PENNIES, item.getPennies());
+        values.put(COLUMN_ITEM_LIST, item.getListName());
         db.insert(TABLE_ITEMS, null, values);
         db.close();
     }
@@ -88,13 +88,26 @@ public class MyDBHandler extends SQLiteOpenHelper{
         ContentValues values = new ContentValues();
         values.put(COLUMN_LIST_NAME, itemList.getName());
         SQLiteDatabase db = getWritableDatabase();
+        for(int i = 0; i<itemList.getItemListLength();i++){
+            item item;
+            item = itemList.getItem(i);
+            item.setListName(itemList.getName());
+            ContentValues values1 = new ContentValues();
+            values1.put(COLUMN_ITEM_NAME, item.getName());
+            values1.put(COLUMN_ITEM_QUANTITY, item.getQuantity());
+            values1.put(COLUMN_ITEM_TOTAL_PRICE, item.getTotalPrice());
+            values1.put(COLUMN_ITEM_POUNDS, item.getPounds());
+            values1.put(COLUMN_ITEM_PENNIES, item.getPennies());
+            values1.put(COLUMN_ITEM_LIST, item.getListName());
+            db.insert(TABLE_ITEMS, null, values1);
+        }
         db.insert(TABLE_LISTS, null, values);
         db.close();
     }
     // delete item by name
     public void deleteItem(String itemName){
         SQLiteDatabase db = getWritableDatabase();
-        db.execSQL("DELETE FROM " + TABLE_ITEMS + " WHERE " + COLUMN_ITEM_NAME + "=\"" + itemName.toLowerCase().trim() + "\";");
+        db.execSQL("DELETE FROM " + TABLE_ITEMS + " WHERE " + COLUMN_ITEM_NAME + "=\"" + itemName.toLowerCase().trim() + "\";" + COLUMN_ITEM_LIST + "=\"" + "Current List" + "\";");
     }
     // delete item by id
     public void deleteItem(int id){
@@ -111,88 +124,12 @@ public class MyDBHandler extends SQLiteOpenHelper{
         SQLiteDatabase db = getWritableDatabase();
         db.execSQL("DELETE FROM " + TABLE_LISTS + " WHERE " + COLUMN_LIST_ID + "=\"" + id + "\";");
     }
-    public item getItem(int id){
-        SQLiteDatabase db = getWritableDatabase();
-        String query = "SELECT * FROM " + TABLE_ITEMS + " WHERE " + COLUMN_ITEM_ID + "=\"" +id + "\";";
-        Cursor c = db.rawQuery(query,null);
-        c.moveToFirst();
-        item item = new item();
-        if(!c.isAfterLast()) {
-            if(c.getString(c.getColumnIndex(COLUMN_ITEM_NAME))!=null) {
-                item.setName(c.getString(c.getColumnIndex(COLUMN_ITEM_NAME)));
-                item.setQuantity(c.getInt(c.getColumnIndex(COLUMN_ITEM_QUANTITY)));
-                item.setTotalPrice(c.getDouble(c.getColumnIndex(COLUMN_ITEM_TOTAL_PRICE)));
-                item.setPounds(c.getInt(c.getColumnIndex(COLUMN_ITEM_POUNDS)));
-                item.setPennies(c.getInt(c.getColumnIndex(COLUMN_ITEM_PENNIES)));
-            }
-        }
-        return item;
-    }
-
-    public item getItem(String name){
-        SQLiteDatabase db = getWritableDatabase();
-        String query = "SELECT * FROM " + TABLE_ITEMS + " WHERE " + COLUMN_ITEM_NAME + "=\"" + name + "\";";
-        Cursor c = db.rawQuery(query,null);
-        c.moveToFirst();
-        item item = new item();
-        if(!c.isAfterLast()) {
-            if(c.getString(c.getColumnIndex(COLUMN_ITEM_NAME))!=null) {
-                item.setName(c.getString(c.getColumnIndex("COLUMN_ITEM_NAME")));
-                item.setQuantity(c.getInt(c.getColumnIndex("COLUMN_ITEM_QUANTITY")));
-                item.setTotalPrice(c.getDouble(c.getColumnIndex("COLUMN_ITEM_TOTAL_PRICE")));
-                item.setPounds(c.getInt(c.getColumnIndex("COLUMN_ITEM_POUNDS")));
-                item.setPennies(c.getInt(c.getColumnIndex("COLUMN_item_PENNIES")));
-            }
-        }
-        return item;
-    }
-    public itemList getList(int id){
-        SQLiteDatabase db = getWritableDatabase();
-        String query = "SELECT * FROM " + TABLE_LISTS + " WHERE "+ COLUMN_LIST_ID + "=\"" + id + "\";";
-
-        Cursor c = db.rawQuery(query,null);
-        c.moveToFirst();
-        itemList list = new itemList();
-        if(!c.isAfterLast()) {
-            if(c.getString(c.getColumnIndex(COLUMN_LIST_NAME))!=null) {
-                list.setName(c.getString(c.getColumnIndex(COLUMN_LIST_NAME)));
-            }
-        }
-        return list;
-    }
-
-    public itemList getList(String name){
-        SQLiteDatabase db = getWritableDatabase();
-        String query = "SELECT * FROM " + TABLE_LISTS + " WHERE " + COLUMN_LIST_NAME + "=\"" + name + "\";";
-        Cursor c = db.rawQuery(query,null);
-        itemList list = new itemList();
-        list.setName(c.getString(c.getColumnIndex("COLUMN_LIST_NAME")));
-        return list;
-    }
-
-    public boolean checkListNull(itemList list){
-
-        if(list.getName()==""||list.getName()==null){
-            return false;
-        }else{
-            return true;
-        }
-    }
-
-    public boolean checkListNull(item item){
-
-        if(item.getName()==""||item.getName()==null){
-            return false;
-        }else{
-            return true;
-        }
-    }
     // print out the database
-    public itemList databaseGetList(){
+    public itemList databaseGetList(String listName){
         String dbString = "";
         itemList dbItemList = new itemList();
         SQLiteDatabase db = getWritableDatabase();
-        String query = "SELECT * FROM " + TABLE_ITEMS + " WHERE 1";
+        String query = "SELECT * FROM " + TABLE_ITEMS + " WHERE "  + COLUMN_ITEM_LIST + "=\"" +listName + "\";";
         // cursor points to location in results
         Cursor c = db.rawQuery(query,null);
         // move cursor to first location

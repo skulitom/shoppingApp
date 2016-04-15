@@ -38,7 +38,7 @@ public class AddItemFragment extends Fragment implements View.OnClickListener{
             sugestion.setText(dictionary.getCoresponFood(editTextName.getText().toString()));
             boolean exists=false;
             int i = 0;
-            itemList dbItemList = dbHandler.databaseGetList();
+            itemList dbItemList = dbHandler.databaseGetList("Current List");
             while(i<dbItemList.getItemListLength()){
                 // cehcks if any items in the current list are equivalent to the item typed in is so exists becomes true
                 if(dbItemList.getItem(i).getName().toLowerCase().trim().equals(editTextName.getText().toString().toLowerCase().trim())){
@@ -154,6 +154,7 @@ public class AddItemFragment extends Fragment implements View.OnClickListener{
             currentItem.setPennies(pennies);
             currentItem.setQuantity(quantity);
             currentItem.setTotalPrice(price/quantity);
+            currentItem.setListName("Current List");
             dbHandler.addItem(currentItem);
 
 
