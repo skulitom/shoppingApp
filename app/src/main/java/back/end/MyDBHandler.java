@@ -107,7 +107,7 @@ public class MyDBHandler extends SQLiteOpenHelper{
     // delete item by name
     public void deleteItem(String itemName){
         SQLiteDatabase db = getWritableDatabase();
-        db.execSQL("DELETE FROM " + TABLE_ITEMS + " WHERE " + COLUMN_ITEM_NAME + "=\"" + itemName.toLowerCase().trim() + "\";" + COLUMN_ITEM_LIST + "=\"" + "Current List" + "\";");
+        db.execSQL("DELETE FROM " + TABLE_ITEMS + " WHERE " + COLUMN_ITEM_NAME + "=\"" + itemName.toLowerCase().trim() + "\"" +" AND "+ COLUMN_ITEM_LIST + "=\"" + "Current List" + "\";");
     }
     // delete item by id
     public void deleteItem(int id){
