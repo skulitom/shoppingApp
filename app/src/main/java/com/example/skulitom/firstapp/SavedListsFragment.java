@@ -13,9 +13,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.CompoundButton;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.view.ViewGroup.LayoutParams;
+import android.widget.Switch;
 
 import back.end.*;
 
@@ -23,12 +25,16 @@ import back.end.*;
 public class SavedListsFragment extends Fragment {
     private View view;
     private MyDBHandler dbHandler;
+    private boolean deleteList = false;
+    private Switch deleteListSwitch;
+    private LinearLayout linearLayout;
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_saved_lists, container,false);
-
+        linearLayout = (LinearLayout) view.findViewById(R.id.LinearLayoutSavedLists);
+        deleteListSwitch = (Switch) view.findViewById(R.id.deleteListsSwitch);
         ScrollView scrollView = (ScrollView)view.findViewById(R.id.scrollViewSavedLists);
        // scrollView.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT,LayoutParams.MATCH_PARENT));
 
@@ -50,24 +56,29 @@ public class SavedListsFragment extends Fragment {
             button.setOnClickListener(new View.OnClickListener() {
 
                 public void onClick(View v) {
-                    itemList itemList = dbHandler.databaseGetList(button.getText().toString());
-                    dbHandler.dropList();
-                    for(int i = 0; i<itemList.getItemListLength();i++){
-                        item item;
-                        item = itemList.getItem(i);
-                        item.setListName("Current List");
-                        dbHandler.addItem(item);
+                    if (!deleteList) {
+                        itemList itemList = dbHandler.databaseGetList(button.getText().toString());
+                        dbHandler.dropList();
+                        for (int i = 0; i < itemList.getItemListLength(); i++) {
+                            item item;
+                            item = itemList.getItem(i);
+                            item.setListName("Current List");
+                            dbHandler.addItem(item);
+                        }
+                        Fragment fragment = null;
+                        Class fragmentClass = ListFragment.class;
+                        try {
+                            fragment = (Fragment) fragmentClass.newInstance();
+                            //dbHandler.dropList();
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                        FragmentManager fragmentManager = getFragmentManager();
+                        fragmentManager.beginTransaction().replace(R.id.frame_container, fragment).commit();
+                    } else {
+                        dbHandler.deleteList(button.getText().toString());
+
                     }
-                    Fragment fragment = null;
-                    Class fragmentClass = ListFragment.class;
-                    try {
-                        fragment = (Fragment) fragmentClass.newInstance();
-                        //dbHandler.dropList();
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
-                    FragmentManager fragmentManager = getFragmentManager();
-                    fragmentManager.beginTransaction().replace(R.id.frame_container, fragment).commit();
 
                 }
             });
@@ -76,7 +87,20 @@ public class SavedListsFragment extends Fragment {
             i++;
 
         }
-        //scrollView.addView(linearLayout);
+
+
+        deleteListSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked) {
+                    // The toggle is enabled
+                    deleteList = true;
+                } else {
+                    // The toggle is disabled
+                    deleteList = false;
+
+                }
+            }
+        });
         return view;
     }
 }

@@ -9,11 +9,13 @@ import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.RelativeLayout;
 import android.widget.SeekBar;
+import android.widget.Spinner;
 import android.widget.Switch;
 import android.widget.TextView;
 
@@ -30,6 +32,9 @@ public class AddItemFragment extends Fragment implements View.OnClickListener{
     private Switch switchA;
     private SeekBar seekBarA;
     private RelativeLayout relativeLayout;
+    private Currency currency = new Currency();
+    private Spinner dropdown;
+    private boolean switchAPhase = false;
     ////- V Below is a input listener for current item name inputed V
     private TextWatcher dictionaryWatcher = new TextWatcher() {
         @Override
@@ -40,7 +45,7 @@ public class AddItemFragment extends Fragment implements View.OnClickListener{
             int i = 0;
             itemList dbItemList = dbHandler.databaseGetList("Current List");
             while(i<dbItemList.getItemListLength()){
-                // cehcks if any items in the current list are equivalent to the item typed in is so exists becomes true
+                // checks if any items in the current list are equivalent to the item typed in is so exists becomes true
                 if(dbItemList.getItem(i).getName().toLowerCase().trim().equals(editTextName.getText().toString().toLowerCase().trim())){
                     exists = true;
                 }
@@ -68,6 +73,7 @@ public class AddItemFragment extends Fragment implements View.OnClickListener{
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        currency.setCurrency(((MainActivity)getActivity()).getLang());
         ////- initiate visual objects
         view = inflater.inflate(R.layout.fragment_add_item, container,false);
         quantityText = (TextView) view.findViewById(R.id.quantityText);
@@ -92,7 +98,7 @@ public class AddItemFragment extends Fragment implements View.OnClickListener{
             }
 
             @Override
-            public void onProgressChanged(SeekBar seekBar, int progress,boolean fromUser) {
+            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
                 int quantity = 0;
                 quantity = seekBar.getProgress();
                 String text = "";
@@ -109,15 +115,22 @@ public class AddItemFragment extends Fragment implements View.OnClickListener{
                 if (isChecked) {
                     // The toggle is enabled
                     relativeLayout.removeView(seekBarA);
+                    dropdown.setVisibility(View.VISIBLE);
+                    switchAPhase = true;
                 } else {
                     // The toggle is disabled
                     relativeLayout.addView(seekBarA);
+                    dropdown.setVisibility(View.GONE);
+                    switchAPhase = false;
+
                 }
             }
         });
         ////
         doneButton.setOnClickListener(this);
-
+        dropdown = (Spinner)view.findViewById(R.id.spinner1);
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_dropdown_item, setSpinnerLang());
+        dropdown.setAdapter(adapter);
 
         return view;
     }
@@ -145,7 +158,12 @@ public class AddItemFragment extends Fragment implements View.OnClickListener{
         if(editTextPrice.getText().toString().trim().length() > 0 && editTextName.getText().toString().trim().length() > 0) {
             currentItem.setName(editTextName.getText().toString());
             double price = 0;
-            int quantity = quantitySeekBar.getProgress();
+            int quantity;
+            if(!switchAPhase) {
+                quantity = quantitySeekBar.getProgress();
+            }else{
+                quantity = 1;
+            }
             try {
                 price = Double.parseDouble(editTextPrice.getText().toString());
             }catch(NumberFormatException e){}
@@ -188,5 +206,11 @@ public class AddItemFragment extends Fragment implements View.OnClickListener{
                 editTextPrice.setError("Price cannot be empty");
             }
         }
+    }
+
+    String [] setSpinnerLang(){
+        String[] lang = currency.getWeights();
+
+        return lang;
     }
 }

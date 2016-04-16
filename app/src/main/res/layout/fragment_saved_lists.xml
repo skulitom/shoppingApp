@@ -11,8 +11,9 @@
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:layout_marginTop="60dp"
+        android:layout_marginBottom="60dp"
         android:id="@+id/scrollViewSavedLists" >
 
         <LinearLayout
@@ -21,5 +22,14 @@
             android:layout_height="wrap_content"
             android:id="@+id/LinearLayoutScrollSL"></LinearLayout>
     </ScrollView>
+
+    <Switch
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Delete Lists"
+        android:id="@+id/deleteListsSwitch"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginBottom="1dp"
+        android:layout_marginTop="-50dp" />
 
 </LinearLayout>

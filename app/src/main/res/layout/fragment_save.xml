@@ -18,7 +18,7 @@
         android:padding="20dp"
         android:textSize="22dp"
         android:background="@android:color/darker_gray"
-        android:textColor="#ffffff"
+        android:textColor="#000000"
         android:backgroundTint="@android:color/holo_blue_light"/>
 
     <EditText
