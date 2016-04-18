@@ -40,7 +40,7 @@ public class SavedListsFragment extends Fragment {
 
         dbHandler = new MyDBHandler(getActivity(),null,null,1);
         // Create a LinearLayout element
-        LinearLayout linearLayout = (LinearLayout)view.findViewById(R.id.LinearLayoutScrollSL);
+        final LinearLayout linearLayout = (LinearLayout)view.findViewById(R.id.LinearLayoutScrollSL);
       //  linearLayout.setOrientation(LinearLayout.VERTICAL);
       //  linearLayout.setLayoutParams(new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT));
 
@@ -76,8 +76,8 @@ public class SavedListsFragment extends Fragment {
                         FragmentManager fragmentManager = getFragmentManager();
                         fragmentManager.beginTransaction().replace(R.id.frame_container, fragment).commit();
                     } else {
-                        dbHandler.deleteList(button.getText().toString());
-
+                        dbHandler.deleteList(button.getText().toString().toString().trim());
+                        linearLayout.removeView(button);
                     }
 
                 }

@@ -9,11 +9,10 @@ import android.database.sqlite.SQLiteOpenHelper;
 import android.database.Cursor;
 import android.content.Context;
 import android.content.ContentValues;
-import android.util.Log;
 
 public class MyDBHandler extends SQLiteOpenHelper{
 
-    private static final int DATABASE_VERSION = 6;
+    private static final int DATABASE_VERSION = 7;
     private static final String DATABASE_NAME = "shopingLists.db";
     ///////////////////////////////////////////////////////////// - item values
     public static final String TABLE_ITEMS = "items";
@@ -74,7 +73,7 @@ public class MyDBHandler extends SQLiteOpenHelper{
     public void addItem(item item){
         ContentValues values = new ContentValues();
         SQLiteDatabase db = getWritableDatabase();
-        values.put(COLUMN_ITEM_NAME, item.getName());
+        values.put(COLUMN_ITEM_NAME, item.getName().toLowerCase().trim());
         values.put(COLUMN_ITEM_QUANTITY, item.getQuantity());
         values.put(COLUMN_ITEM_TOTAL_PRICE, item.getTotalPrice());
         values.put(COLUMN_ITEM_POUNDS, item.getPounds());
@@ -93,7 +92,7 @@ public class MyDBHandler extends SQLiteOpenHelper{
             item = itemList.getItem(i);
             item.setListName(itemList.getName());
             ContentValues values1 = new ContentValues();
-            values1.put(COLUMN_ITEM_NAME, item.getName());
+            values1.put(COLUMN_ITEM_NAME, item.getName().toLowerCase().trim());
             values1.put(COLUMN_ITEM_QUANTITY, item.getQuantity());
             values1.put(COLUMN_ITEM_TOTAL_PRICE, item.getTotalPrice());
             values1.put(COLUMN_ITEM_POUNDS, item.getPounds());
@@ -143,7 +142,7 @@ public class MyDBHandler extends SQLiteOpenHelper{
                 dbItem.setQuantity(c.getInt(c.getColumnIndex("quantity")));
                 dbItem.setPounds(c.getInt(c.getColumnIndex("pounds")));
                 dbItem.setPennies(c.getInt(c.getColumnIndex("pennies")));
-                dbItem.setTotalPrice(c.getDouble(c.getColumnIndex("price")));
+                dbItem.setTotalPrice(c.getDouble(c.getColumnIndex("price")) /c.getInt(c.getColumnIndex("quantity")));
                 dbItemList.addItem(dbItem);
             }
             c.moveToNext();

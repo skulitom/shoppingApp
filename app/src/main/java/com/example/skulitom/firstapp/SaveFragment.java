@@ -41,7 +41,7 @@ public class
         if(editTextName.getText().toString().trim().length() > 0) {
 
             currentList = dbHandler.databaseGetList("Current List");
-            currentList.setName(editTextName.getText().toString());
+            currentList.setName(editTextName.getText().toString().toLowerCase().trim());
 
             dbHandler.addList(currentList);
 

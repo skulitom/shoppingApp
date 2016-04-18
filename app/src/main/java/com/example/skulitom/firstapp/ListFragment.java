@@ -1,21 +1,17 @@
 package com.example.skulitom.firstapp;
 
 
-import android.content.Context;
 import android.graphics.Color;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.LinearLayout;
-import android.widget.ScrollView;
 
 import back.end.*;
 
@@ -44,7 +40,6 @@ public class ListFragment extends Fragment implements View.OnClickListener{
                 final Button button = new Button(this.getActivity());
                 final String buttonName = dbItemList.getItem(i).getName().toLowerCase().trim();
                 String bText = dbItemList.getItem(i).getName()+" : "+currency.getSymbol()+addZeroToDouble(dbItemList.getItem(i).getTotalPrice());
-                Log.d("movie:android",dbItemList.getItem(i).getName());
                 button.setText(bText);
                 button.setGravity(Gravity.CENTER);
                 button.setBackgroundColor(Color.rgb(255, 255, 255));
@@ -61,7 +56,6 @@ public class ListFragment extends Fragment implements View.OnClickListener{
 
                             public void onClick(View v) {
                                 dbHandler.deleteItem(buttonName);
-                                Log.d("android:HELP",buttonName);
                                 linearLayout.removeView(button);
                             }
                         });

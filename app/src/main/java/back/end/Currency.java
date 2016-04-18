@@ -7,7 +7,7 @@ public class Currency {
     private char symbol;
     private String bigCurrency;
     private String smallCurrency;
-    private String [] weights= new String [10];
+    private String [] weights= new String [17];
 
     public Currency(){
         this.symbol = '£';
@@ -23,6 +23,13 @@ public class Currency {
         this.weights[7]= "1 kilogram";
         this.weights[8]= "10 kilograms";
         this.weights[9]= "100 kilograms";
+        this.weights[10]= "100 mililitres";
+        this.weights[11]= "200 mililitres";
+        this.weights[12]= "500 mililitres";
+        this.weights[13]= "1 litre";
+        this.weights[14]= "2 litres";
+        this.weights[15]= "5 litres";
+        this.weights[16]= "10 litres";
     }
 
     public void setCurrency(int lang){
@@ -41,6 +48,13 @@ public class Currency {
                 this.weights[7]= "1 kilogram";
                 this.weights[8]= "10 kilograms";
                 this.weights[9]= "100 kilograms";
+                this.weights[10]= "100 mililitres";
+                this.weights[11]= "200 mililitres";
+                this.weights[12]= "500 mililitres";
+                this.weights[13]= "1 litre";
+                this.weights[14]= "2 litres";
+                this.weights[15]= "5 litres";
+                this.weights[16]= "10 litres";
                 break;
             case 1:
                 this.symbol = '$';
@@ -56,6 +70,13 @@ public class Currency {
                 this.weights[7]= "1 pound";
                 this.weights[8]= "10 pounds";
                 this.weights[9]= "100 pounds";
+                this.weights[10]= "100 mililitres";
+                this.weights[11]= "200 mililitres";
+                this.weights[12]= "500 mililitres";
+                this.weights[13]= "1 litre";
+                this.weights[14]= "2 litres";
+                this.weights[15]= "5 litres";
+                this.weights[16]= "10 litres";
                 break;
             default:
                 this.symbol = '£';
@@ -71,6 +92,13 @@ public class Currency {
                 this.weights[7]= "1 kilogram";
                 this.weights[8]= "10 kilograms";
                 this.weights[9]= "100 kilograms";
+                this.weights[10]= "100 mililitres";
+                this.weights[11]= "200 mililitres";
+                this.weights[12]= "500 mililitres";
+                this.weights[13]= "1 litre";
+                this.weights[14]= "2 litres";
+                this.weights[15]= "5 litres";
+                this.weights[16]= "10 litres";
                 break;
         }
 
